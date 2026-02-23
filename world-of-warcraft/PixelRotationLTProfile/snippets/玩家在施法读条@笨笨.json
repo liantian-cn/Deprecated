@@ -1,0 +1,7 @@
+{
+    "code": "local name, _, _, _, _, _, _, _, _, _ = UnitChannelInfo(\"player\")\nif name then\n    return  true\nend\n\nname, _, _, _, _, _, _, _, _ = UnitCastingInfo(\"player\")\nif name then\n    return  true\nend\nreturn false",
+    "desc": "",
+    "func_args": [
+        "timelimit"
+    ]
+}

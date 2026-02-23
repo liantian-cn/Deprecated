@@ -1,0 +1,5 @@
+{
+    "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u67af\u840e\u51cb\u96f6\",\"HELPFUL|PLAYER\")\nlocal remaining = 0\nif aura then\n    if aura.duration > 4 then\n            -- \u4e8c\u6bb5\u51cb\u96f6+4\u79d2\n        remaining = aura.expirationTime - GetTime() + 4\n    else\n        remaining = aura.expirationTime - GetTime()\n    end\n    return math.max(remaining, 0)\nelse\n    return remaining\nend",
+    "desc": "",
+    "func_args": []
+}

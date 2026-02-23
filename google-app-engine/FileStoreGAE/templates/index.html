@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-lg-25 col-md-25 col-sm-25 col-xs-25  grid">
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 grid-item">
+                <div class="well">
+                    <h3 class="text-center">上传文件</h3>
+                    {% if form.errors %}
+                        {% for field in form.errors %}
+                            {% for error in form.errors[field] %}
+                                <div class="alert alert-error">
+                                    {{ field }} : {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <form class="form-horizontal" method="post" action="{{ url_for('upload') }}"
+                          enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        <div class="form-group">
+                            <label for="{{ form.description.id }}">描述：</label>
+                            <textarea class="form-control" rows="3" id="{{ form.description.id }}"
+                                      name="{{ form.description.name }}" placeholder=""
+                                      required="required"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ form.file.id }}">文件：</label>
+                            <input type="file" id="{{ form.file.id }}" name="{{ form.file.name }}" required="required">
+                        </div>
+
+                        <p class="text-center">
+                            <input type="submit" class="btn btn-success  btn-block" value="上传">
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+
+            {% for doc in docs %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 grid-item">
+                    <div class="thumbnail"><img src="
+                            {% if doc.is_image() %}
+                                {{ url_for('thumbnail', key=doc.key.urlsafe(), filename = doc.filename) }}
+                            {% else %}
+                                {{ doc.mime_type | mime2img }}
+                            {% endif %}"
+                                                alt="Thumbnail Image" class="img-responsive img-rounded">
+                        <div class="caption">
+                            <h4>{{ doc.filename }}</h4>
+                            <p>{{ doc.description }}</p>
+                            <hr>
+
+                            <div class="input-group">
+                                <input title="markdown" class="form-control" type="text" value="[{{ doc.filename }}]({{ config.SITE_URL }}{{ url_for('download', key=doc.key.urlsafe(), filename = doc.filename) }})" onclick="this.select()">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delModal"
+                                            data-filename="{{ doc.filename }}"
+                                            data-delurl="{{ url_for('delete', key=doc.key.urlsafe()) }}">DEL</button>
+      </span>
+                            </div><!-- /input-group -->
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+    <div class="row">
+{% if more %}
+<nav>
+  <ul class="pager">
+    <li><a href="?cursor={{ next_cursor.urlsafe() }}">更多</a></li>
+  </ul>
+</nav>
+{% endif %}
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var $container = $(".grid");
+
+            $container.imagesLoaded(function () {
+                $container.masonry({
+                    // options
+                    itemSelector: '.grid-item'
+                });
+            });
+        });
+
+    </script>
+
+
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="delModalLabel">删除:</h4>
+                </div>
+                <div class="modal-footer">
+
+                    <a type="button" class="btn btn-warning" id="del_file">确认</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消！</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        $('#delModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            // Button that triggered the modal
+            var delurl = button.data('delurl');
+            // Extract info from data-* attributes
+            var filename = button.data('filename');
+            // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this);
+            modal.find('.modal-title').text('删除：' + filename);
+            modal.find('#del_file').attr("href", delurl);
+        })
+    </script>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+{
+    "code": "return  GetTotemTimeLeft(1)",
+    "desc": "",
+    "func_args": []
+}

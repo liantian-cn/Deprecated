@@ -1,0 +1,7 @@
+{
+    "code": "    local aura  = C_UnitAuras.GetAuraDataBySpellName(\"target\", debuff_name,\"HARMFUL|PLAYER\")\n    if aura  then\n        local remaining = aura.expirationTime - GetTime()\n        return math.max(remaining, 0)\n    end\n    return 0",
+    "desc": "",
+    "func_args": [
+        "debuff_name"
+    ]
+}

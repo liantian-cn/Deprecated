@@ -1,0 +1,5 @@
+{
+    "code": "local spellCooldownInfo = C_Spell.GetSpellCooldown(61304)\nlocal gcd_remaining\nif spellCooldownInfo.duration == 0 then\n    gcd_remaining = 0\nelse\n    gcd_remaining =  spellCooldownInfo.startTime + spellCooldownInfo.duration - GetTime()\nend\n\nlocal amount = 0\nfor i = 1, 6 do\n    local start, duration, runeReady = GetRuneCooldown(i)\n    if runeReady then\n        amount = amount + 1\n    else\n        -- \u5982\u679c\u7b26\u6587\u51b7\u5374\u5c0f\u4e8eGCD\uff0c\u4e5f\u7b97\n        if (start+duration-GetTime()) < gcd_remaining then\n            amount = amount + 1\n        end\n    end\nend\nreturn amount",
+    "desc": "",
+    "func_args": []
+}

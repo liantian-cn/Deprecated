@@ -1,0 +1,5 @@
+{
+    "code": "return  UnitHealth(\"player\") / UnitHealthMax(\"player\") *100",
+    "desc": "\u8fd4\u56de\u8840\u91cf\u7684\u767e\u5206\u6bd4\u6570\u503c",
+    "func_args": []
+}

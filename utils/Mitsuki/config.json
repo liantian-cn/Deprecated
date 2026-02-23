@@ -1,0 +1,11 @@
+{
+    "method": "aes-256-ctr",
+    "obfs": "tls1.2_ticket_auth",
+    "obfsparam": "www.baidu.com",
+    "password": "password",
+    "protocol": "auth_aes128_md5",
+    "protocolparam": "protocolparam",
+    "server_addr": "localhost",
+    "server_port": 440,
+    "uuid": "234a8795-926d-479d-be4e-d448ef5171d5"
+}

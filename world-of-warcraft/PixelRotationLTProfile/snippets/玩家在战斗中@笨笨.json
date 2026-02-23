@@ -1,0 +1,5 @@
+{
+    "code": "return UnitAffectingCombat(\"player\")",
+    "desc": "",
+    "func_args": []
+}

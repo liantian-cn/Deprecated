@@ -1,0 +1,37 @@
+{% extends "layer/base.html" %}
+
+{% block title %}{{ config.SITE_NAME }}{% endblock %}
+
+
+{% block main %}
+
+
+
+
+    <h3 class="archive-title">包含关键字 {{ query_string }} 的文章</h3>
+
+
+
+    {% for post in posts %}
+
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+            <h2 class="post-title" itemprop="name headline"><a itemprop="url" href="{{ url_for("post",slug=post.slug) }}">{{ post.title }}</a></h2>
+            {#            <ul class="post-meta">#}
+            {#                <li itemprop="author" itemscope itemtype="http://schema.org/Person">作者: <a itemprop="name" rel="author">{{ config.SITE_AUTHOR }}</a></li>#}
+            {#                <li>时间:#}
+            {#                    <time datetime="{{ post.modified.isoformat() }}" itemprop="datePublished">{{ post.modified.strftime(config.SITE_POST_DATETIME_FORMAT) }}</time>#}
+            {#                </li>#}
+            {#                <li>分類: {{ post.get_category_display }}</li>#}
+            {#                <li itemprop="interactionCount"><a itemprop="discussionUrl" href="{{ url_for("post",slug=post.slug) }}#comments">{{ post.get_comment_count }} 条评论</a></li>#}
+            {#            </ul>#}
+            <div class="post-content" itemprop="articleBody">
+                {{ post.text|md_summary|safe }}
+            </div>
+        </article>
+
+
+
+    {% endfor %}
+
+{% endblock %}

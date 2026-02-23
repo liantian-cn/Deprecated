@@ -1,0 +1,8 @@
+nuitka --standalone --assume-yes-for-downloads  --windows-uac-admin --mingw64 --windows-icon-from-ico=E:/Documents/GitHub/PixelRotationLT/resource/images/favicon.ico --enable-plugins=pyside6  --windows-console-mode=disable --output-dir=E:/Documents/GitHub/PixelRotationLT/build E:/Documents/GitHub/PixelRotationLT/PixelRotation.py
+
+nuitka --standalone --onefile --assume-yes-for-downloads  --windows-uac-admin --mingw64 --windows-icon-from-ico=E:/Documents/GitHub/PixelRotationLT/resource/images/favicon.ico --enable-plugins=pyside6  --windows-console-mode=disable --output-dir=E:/Documents/GitHub/PixelRotationLT/build E:/Documents/GitHub/PixelRotationLT/PixelRotation.py
+
+
+
+nuitka --standalone --onefile --assume-yes-for-downloads --mingw64 --windows-icon-from-ico=E:/Documents/GitHub/PixelRotationLT/resource/images/favicon.ico   --output-dir=E:/Documents/GitHub/PixelRotationLT/build E:/Documents/GitHub/PixelRotationLT/genSN.py
+

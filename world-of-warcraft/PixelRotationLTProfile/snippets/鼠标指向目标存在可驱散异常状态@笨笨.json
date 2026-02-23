@@ -1,0 +1,7 @@
+{
+    "code": "for i = 1, 40 do\n    local aura = C_UnitAuras.GetAuraDataByIndex('mouseover', i, \"HARMFUL|RAID\")\n    if aura then\n        if aura.isRaid and (aura.dispelName == buff_type) then\n            return true\n        end\n    else\n        break\n    end\nend\nreturn false",
+    "desc": "",
+    "func_args": [
+        "buff_type"
+    ]
+}

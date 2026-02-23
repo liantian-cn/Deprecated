@@ -1,0 +1,5 @@
+{
+    "code": "return IsMounted()",
+    "desc": "",
+    "func_args": []
+}

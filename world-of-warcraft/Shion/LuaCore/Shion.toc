@@ -1,0 +1,11 @@
+
+## Interface: 110005, 110007, 110100
+## Title:  |cffff5900S|cffffb300h|cfff0ff00i|cff96ff00o|cffff5900n
+## Notes: 神秘插件.
+## Version: 2025.03.22
+## Author: liantian-cn
+## IconAtlas: questlog-questtypeicon-weekly
+## SavedVariables: ShionSave
+
+
+Shion.lua

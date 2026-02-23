@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4994d4f1-d710-4325-af8e-8fc271dc360b" name="更改" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2ufiOCJ6bb7oVL6JV0k2EEMJVxi" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Documents/GitHub/Shion&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="4994d4f1-d710-4325-af8e-8fc271dc360b" name="更改" comment="" />
+      <created>1742645995057</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742645995057</updated>
+      <workItem from="1742646000972" duration="4836000" />
+      <workItem from="1742658928027" duration="5000" />
+      <workItem from="1742658939837" duration="2176000" />
+      <workItem from="1742690651740" duration="25879000" />
+      <workItem from="1742817770634" duration="11000" />
+      <workItem from="1742817814419" duration="2075000" />
+      <workItem from="1742827696216" duration="1954000" />
+      <workItem from="1742905850938" duration="595000" />
+      <workItem from="1742949292915" duration="13379000" />
+      <workItem from="1742988387888" duration="2826000" />
+      <workItem from="1742992191211" duration="9667000" />
+      <workItem from="1743037839864" duration="4498000" />
+      <workItem from="1743080301656" duration="4414000" />
+      <workItem from="1743142241670" duration="640000" />
+      <workItem from="1743159203558" duration="6288000" />
+      <workItem from="1743171200441" duration="7904000" />
+      <workItem from="1743211449728" duration="7000" />
+      <workItem from="1743211470018" duration="13590000" />
+      <workItem from="1743225506101" duration="3776000" />
+      <workItem from="1743250955705" duration="1964000" />
+      <workItem from="1743300988334" duration="15004000" />
+      <workItem from="1743421205020" duration="1904000" />
+      <workItem from="1743680424191" duration="611000" />
+      <workItem from="1743731343422" duration="15315000" />
+      <workItem from="1743813207375" duration="31632000" />
+      <workItem from="1743901947374" duration="28228000" />
+      <workItem from="1744023132359" duration="12728000" />
+      <workItem from="1744098826767" duration="15525000" />
+      <workItem from="1744201510063" duration="2629000" />
+      <workItem from="1744285111880" duration="5648000" />
+      <workItem from="1744301715909" duration="344000" />
+      <workItem from="1744370506314" duration="3202000" />
+      <workItem from="1744422632420" duration="14590000" />
+      <workItem from="1744505077023" duration="34348000" />
+      <workItem from="1744627991039" duration="4764000" />
+      <workItem from="1744715174928" duration="4781000" />
+      <workItem from="1744887117582" duration="2650000" />
+      <workItem from="1744977389159" duration="1273000" />
+      <workItem from="1745023794288" duration="1310000" />
+      <workItem from="1745064513850" duration="5283000" />
+      <workItem from="1745108584911" duration="5611000" />
+      <workItem from="1745144175491" duration="3836000" />
+      <workItem from="1745235140886" duration="614000" />
+      <workItem from="1745238914542" duration="3541000" />
+      <workItem from="1745322006267" duration="3475000" />
+      <workItem from="1745411229886" duration="8468000" />
+      <workItem from="1745460938525" duration="8055000" />
+      <workItem from="1745583054007" duration="1034000" />
+      <workItem from="1745625823654" duration="4502000" />
+      <workItem from="1745669178899" duration="645000" />
+      <workItem from="1745753272895" duration="2641000" />
+      <workItem from="1745838147831" duration="4724000" />
+      <workItem from="1745930033154" duration="1402000" />
+      <workItem from="1746011919973" duration="3041000" />
+      <workItem from="1746058194397" duration="6756000" />
+      <workItem from="1746151050313" duration="3156000" />
+      <workItem from="1746180656984" duration="5936000" />
+      <workItem from="1746241549648" duration="604000" />
+      <workItem from="1746265080221" duration="3660000" />
+      <workItem from="1746530954408" duration="1422000" />
+      <workItem from="1746704117129" duration="3317000" />
+      <workItem from="1746788063716" duration="597000" />
+      <workItem from="1746794044589" duration="2474000" />
+      <workItem from="1746838471784" duration="5116000" />
+      <workItem from="1746879813607" duration="1223000" />
+      <workItem from="1746924637285" duration="2560000" />
+      <workItem from="1746957451821" duration="736000" />
+      <workItem from="1746967656318" duration="2736000" />
+      <workItem from="1747049447949" duration="2076000" />
+      <workItem from="1747230945126" duration="59000" />
+      <workItem from="1747394263881" duration="6527000" />
+      <workItem from="1747441606107" duration="1040000" />
+      <workItem from="1747444840233" duration="3735000" />
+      <workItem from="1747448931225" duration="12280000" />
+      <workItem from="1747531811975" duration="7990000" />
+      <workItem from="1747655236509" duration="3573000" />
+      <workItem from="1747740616550" duration="1857000" />
+      <workItem from="1747826821760" duration="601000" />
+      <workItem from="1747911808928" duration="2661000" />
+      <workItem from="1747999690836" duration="1364000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Shion$Test2.coverage" NAME="Test2 覆盖结果" MODIFIED="1743163831302" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Shion$Test3.coverage" NAME="Test3 覆盖结果" MODIFIED="1743302102520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Shion$ShionApp.coverage" NAME="ShionApp 覆盖结果" MODIFIED="1743222573567" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Shion$ShionAppDev.coverage" NAME="ShionAppDev 覆盖结果" MODIFIED="1748007251927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Shion$__init__.coverage" NAME="__init__ 覆盖结果" MODIFIED="1742828236365" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DemonHunterVengeance" />
+    <SUITE FILE_PATH="coverage/Shion$Test1.coverage" NAME="Test1 覆盖结果" MODIFIED="1746061342436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Shion$deploy.coverage" NAME="deploy 覆盖结果" MODIFIED="1744438317536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

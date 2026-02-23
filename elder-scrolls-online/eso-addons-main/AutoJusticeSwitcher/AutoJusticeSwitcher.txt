@@ -1,0 +1,9 @@
+## Title: |cFF54E5公正w切换器|r
+## APIVersion: 101308
+## Version: 1.0.0
+## Author: liantian-cn
+## Description: 在做兄弟会任务时，关闭"避免攻击无辜者"，并在离开任务地点口打开
+## IsLibrary: false
+
+
+AutoJusticeSwitcher.lua

@@ -1,0 +1,7 @@
+{
+    "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", buff_name , \"HARMFUL\")\nif aura then\n    return true\nend\nreturn false",
+    "desc": "",
+    "func_args": [
+        "buff_name"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "code": "local varType = type(buff_name) -- luacheck: ignore\nlocal aura = false\nif varType == \"string\" then\n    aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", buff_name , \"HELPFUL|PLAYER\")  -- luacheck: ignore\nelseif varType == \"number\" then\n    aura = C_UnitAuras.GetPlayerAuraBySpellID(buff_name)  -- luacheck: ignore\nend\n\nif aura then\n    return true\nend\nreturn false",
+    "desc": "",
+    "func_args": [
+        "buff_name"
+    ]
+}

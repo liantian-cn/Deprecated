@@ -1,0 +1,5 @@
+{
+    "code": "return UnitPower(\"player\", Enum.PowerType.Fury)",
+    "desc": "",
+    "func_args": []
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+    <channel>
+        <title>{{ config.SITE_NAME }}</title>
+        <link>{{ config.SITE_URL }}</link>
+        <atom:link href="{{ config.SITE_URL }}{{ url_for('rss') }}" rel="self" type="application/rss+xml"/>
+        <language>{{ config.SITE_LOCALE }}</language>
+        <description>{{ config.SITE_DESCRIPTION }}</description>
+        <lastBuildDate>{{ config.LATEST.strftime("%a, %d %b %Y %H:%M:%S %z") }}</lastBuildDate>
+        <pubDate>{{ config.LATEST.strftime("%a, %d %b %Y %H:%M:%S %z") }}</pubDate>
+
+        {% for post in posts %}
+            <item>
+                <title>{{ post.title }}</title>
+                <link>{{ config.SITE_URL }}{{ url_for("post",slug=post.slug) }}</link>
+                <guid>{{ config.SITE_URL }}{{ url_for("post",slug=post.slug) }}</guid>
+                <pubDate>{{ post.modified.strftime("%a, %d %b %Y %H:%M:%S %z") }}</pubDate>
+                <dc:creator>{{ config.SITE_AUTHOR }}</dc:creator>
+                <description><![CDATA[{{ post.title|safe }}]]></description>
+                <content:encoded xml:lang="{{ config.SITE_LOCALE }}"><![CDATA[{{ post.text|md_summary|safe }}]]></content:encoded>
+                <comments>{{ config.SITE_URL }}{{ url_for("post",slug=post.slug) }}#disqus_thread</comments>
+            </item>
+        {% endfor %}
+
+    </channel>
+</rss>

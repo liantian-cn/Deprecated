@@ -1,0 +1,7 @@
+{
+    "code": "local isUsable, insufficientPower = C_Spell.IsSpellUsable(spellIdentifier)\nreturn isUsable or insufficientPower",
+    "desc": "",
+    "func_args": [
+        "spellIdentifier"
+    ]
+}

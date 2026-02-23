@@ -1,0 +1,7 @@
+{
+    "code": "return PixelRotationLT.ShouldInterrupt(targetUnit)",
+    "desc": "",
+    "func_args": [
+        "targetUnit"
+    ]
+}

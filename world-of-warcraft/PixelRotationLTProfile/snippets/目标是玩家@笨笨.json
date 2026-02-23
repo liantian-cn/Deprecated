@@ -1,0 +1,5 @@
+{
+    "code": "return UnitIsPlayer(\"target\")",
+    "desc": "",
+    "func_args": []
+}

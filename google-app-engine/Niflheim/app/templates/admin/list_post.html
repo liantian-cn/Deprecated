@@ -1,0 +1,68 @@
+{% extends "admin/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                文章列表
+            </h2>
+
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-hover  table-condensed">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>標題</th>
+                    <th>狀態</th>
+                    <th>分類</th>
+                    <th>修改時間</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in posts %}
+
+                    <tr class="{% if post.status == "draft" %}warning{% elif post.status == "deleted" %}danger{% endif %}">
+                        <td><a href="{{ url_for('admin.post.edit', key=post.key.urlsafe()) }}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.get_status_display }}</td>
+                        <td>@mdo</td>
+                        <td title="{{ post.modified.strftime("%Y-%m-%d") }}">{{ post.modified.strftime("%Y-%m-%d") }}</td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="col-md-12">
+            <nav aria-label="...">
+                <ul class="pager">
+                    {% if cursor %}
+                        <li class="previous "><a href="javascript:history.back()"><span aria-hidden="true">&larr;</span>較新文章</a></li>
+                    {% else %}
+                        <li class="previous disabled"><a><span aria-hidden="true">&larr;</span>較新文章</a></li>
+                    {% endif %}"
+
+                    {% if not more %}
+                        <li class="next disabled"><a>較舊文章 <span aria-hidden="true">&rarr;</span></a></li>
+                    {% else %}
+                        <li class="next"><a href="{{ url_for("admin.post.list") }}?cursor={{ next_cursor.urlsafe() }}">較舊文章<span aria-hidden="true">&rarr;</span></a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block extend_js %}
+
+{% endblock %}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="Author" content="Lien Tian">
+
+    <meta charset="UTF-8">
+    <title>HideFile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+</head>
+<body>
+
+
+<div class="header">
+    <div class="header-main">
+        <div class="headerlogo">
+            <a href="/">HideFile</a>
+        </div>
+        <div class="headermenu">
+            <ul>
+                <li><a href="https://liantian.me/" title="ToolBox">LIANTIAN&#39;S LOG</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="content post entry">
+    <h1>合并</h1>
+    <ul>
+        <li>
+            Method : POST
+        </li>
+    </ul>
+
+    <table>
+        <thead>
+        <tr>
+            <th>参数</th>
+            <th>必要 or 可选</th>
+            <th>说明</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>file</td>
+            <td>必要</td>
+            <td>待合并的文件。</td>
+        </tr>
+        <tr>
+            <td>img</td>
+            <td>必要</td>
+            <td>待合并的图片。</td>
+        </tr>
+        </tbody>
+    </table>
+    <p><strong>返回值：</strong>一个藏有文件的图片。</p>
+    <h4>表单:</h4>
+    <form action="{{ url_for("merge") }}" method="post" enctype="multipart/form-data">
+        {{ m_form.csrf_token }}
+        <p>
+           文件： {{ m_form.file }}
+        </p>
+
+        <p>
+           图片： {{ m_form.img }}
+        </p>
+        {{ m_form.submit }}
+
+    </form>
+
+    <hr>
+
+
+    <h1>分解</h1>
+    <ul>
+        <li>
+            Method : POST
+        </li>
+    </ul>
+
+    <table>
+        <thead>
+        <tr>
+            <th>参数</th>
+            <th>必要 or 可选</th>
+            <th>说明</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>img</td>
+            <td>必要</td>
+            <td>待分解的图片。</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><strong>返回值：</strong>隐藏文件的二进制无扩展名。</p>
+
+    <h4>表单:</h4>
+    <form action="{{ url_for("split") }}" method="post" enctype="multipart/form-data">
+        {{ s_form.csrf_token }}
+        <p>
+           图片： {{ s_form.img }}
+        </p>
+        {{ s_form.submit }}
+
+    </form>
+
+    <hr>
+
+
+</div>
+
+<div class="footer">
+
+    <p> &copy; 2020 liantian.me |
+        <a href="https://github.com/liantian-cn/Toolbox">Source</a></p>
+</div>
+</body>
+</html>
+
+
+

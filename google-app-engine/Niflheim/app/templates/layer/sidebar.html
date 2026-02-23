@@ -1,0 +1,68 @@
+{% if config.SITE_SIDEBAR_SHOW_RECENT_POST %}
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+        <ul class="widget-list">
+            {% for post in recent_post %}
+                <li><a href="{{ url_for("post" ,slug=post.slug ) }}">{{ post.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}
+
+{#{% if config.SITE_SIDEBAR_SHOW_RECENT_COMMENT %}#}
+{#    <section class="widget">#}
+{#        <h3 class="widget-title">最近回复</h3>#}
+{#        <ul class="widget-list">#}
+{#            {% for comment in recent_comment %}#}
+{#                <li><a href="{{ url_for("post_url_safe_to_slug",key=comment.key) }}">{{ comment.nickname }}</a>: {{ comment.text|escape|truncate(35) }}</li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </section>#}
+{#{% endif %}#}
+
+
+{% if config.SITE_SIDEBAR_SHOW_CATEGORY %}
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            {% for category in categories %}
+                <li class="category-level-0 category-parent">
+                    <a href="{{ url_for("category",slug=category.slug) }}">{{ category.title }}</a> ({{ category.post_count }})
+                    {% if category.child %}
+                        <ul class="widget-list">
+                            {% for c in category.child %}
+                                <li class="category-level-1 category-child category-level-odd"><a href="{{ url_for("category",slug=c.slug) }}">{{ c.title }}</a> ({{ c.post_count }})</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}
+
+
+{% if config.SITE_SIDEBAR_SHOW_ARCHIVE %}
+    <section class="widget">
+        <h3 class="widget-title">归档</h3>
+        <ul class="widget-list">
+            {% for archive in archives %}
+                <li><a href="{{ url_for("archive",year=archive.year,month=archive.month) }}">{{ archive.format_time }}</a> ({{ archive.post_count }})</li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}
+
+
+
+
+<section class="widget">
+    <h3 class="widget-title">其它</h3>
+    <ul class="widget-list">
+        <li class="last"><a href="{{ url_for("admin.index") }}">进入后台</a></li>
+        <li><a href="{{ config.SITE_URL }}{{ url_for('rss') }}">文章 RSS</a></li>
+    </ul>
+</section>
+
+
+

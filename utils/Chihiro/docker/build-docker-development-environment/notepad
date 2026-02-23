@@ -1,0 +1,28 @@
+docker build --tag chihiro-development-environment:latest  .
+
+
+
+docker create \
+    -p 40022:22 \
+    -p 41080:1080 \
+    -p 48000:8000 \
+    -p 48080:8080 \
+    --log-driver local \
+    --log-opt max-size=10m \
+    --log-opt max-file=3 \
+    --log-opt compress=true \
+    --restart always  \
+    --name ChihiroDevEnv \
+    chihiro-development-environment:latest
+
+
+
+docker start  ChihiroDevEnv
+
+docker exec -it ChihiroDevEnv bash
+
+docker ps 
+
+
+
+

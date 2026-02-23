@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mitsuki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
+</head>
+<body>
+<div class="container">
+    <table class="u-full-width">
+        <thead>
+        <tr>
+            <th>服务器地址</th>
+            <th>上次检测</th>
+            <th>延迟</th>
+            <th>EP</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for server in server_list %}
+            <tr id = "{{ server.uuid }}">
+                <td title="{{ server.add }}">{{ server.ps }}</td>
+                <td>{{ server.latest_tests|time_ago }}</td>
+                <td>{{ server.test_result }}</td>
+                <td><a class="button {% if server.uuid == activate_uuid %}button-primary{% endif %}" href="{{ url_for("activate",server_uuid=server.uuid) }}">{{ "{:.2f}".format(server.ep) }} </a> </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

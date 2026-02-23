@@ -1,0 +1,8 @@
+{
+    "code": "local spellInfo = C_Spell.GetSpellInfo(spell_name)\nlocal chargeInfo = C_Spell.GetSpellCharges(spellInfo.spellID)\n\nif chargeInfo.currentCharges == chargeInfo.maxCharges then\n    return chargeInfo.currentCharges\nelse\n    local gcd\n    if cooldownLimit == nil then\n        gcd = PixelRotationLT.GcdRemaining()\n    else\n        gcd = cooldownLimit/1000\n    end\n    local cd = chargeInfo.cooldownStartTime + chargeInfo.cooldownDuration - GetTime()\n    if (cd > gcd) then\n        return chargeInfo.currentCharges\n    else\n        return chargeInfo.currentCharges+1\n    end\nend",
+    "desc": "",
+    "func_args": [
+        "spell_name",
+        "cooldownLimit"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "code": "local currentSpeed, _ = GetUnitSpeed(\"player\")\nreturn currentSpeed",
+    "desc": "",
+    "func_args": []
+}

@@ -1,0 +1,7 @@
+{
+    "code": "    local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", buff_name,\"HELPFUL|PLAYER\")\n    if aura then\n        return true\n    end\n    return false",
+    "desc": "",
+    "func_args": [
+        "buff_name"
+    ]
+}

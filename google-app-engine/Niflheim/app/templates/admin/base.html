@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ config.SITE_DESCRIPTION }}">
+    <meta name="author" content="{{ config.SITE_NAME }}">
+    <meta name="keywords" content="{{ config.SITE_KEY_WORDS }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin/css/editormd.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css">
+
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='admin/js/editormd.min.js') }}"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment-with-locales.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/select2/3.5.4/select2.min.js"></script>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/mistic100-Bootstrap-Confirmation/2.4.1/bootstrap-confirmation.min.js"></script>
+    <script>
+        moment.locale("{{ config.SITE_LOCALE }}");
+
+        function flask_moment_render(elem) {
+            $(elem).text(eval('moment("' + $(elem).data('timestamp') + '").' + $(elem).data('format') + ';'));
+            $(elem).removeClass('flask-moment').show();
+        }
+
+        function flask_moment_render_all() {
+            $('.flask-moment').each(function () {
+                flask_moment_render(this);
+                if ($(this).data('refresh')) {
+                    (function (elem, interval) {
+                        setInterval(function () {
+                            flask_moment_render(elem)
+                        }, interval);
+                    })(this, $(this).data('refresh'));
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            flask_moment_render_all();
+        });
+    </script>
+    {% block extend_css %}
+    {% endblock %}
+
+    <title>{{ config.SITE_NAME }} Admin</title>
+</head>
+
+<body>
+
+<nav class="navbar navbar-default  navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="" onclick="location.reload(true);">{{ config.SITE_NAME }}</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                {#                <li><a href="{{ url_for('index') }}">首页</a></li>#}
+                {#                <li><a href="{{ url_for('index') }}">首页</a></li>#}
+                <li><a href="{{ url_for('admin.post.new') }}">新文章</a></li>
+                <li><a href="{{ url_for('admin.post.list') }}">文章列表</a></li>
+                <li><a href="{{ url_for('admin.option') }}">站點設置</a></li>
+                <li><a href="{{ url_for('admin.category.list') }}">分類設置</a></li>
+                <li><a href="https://console.cloud.google.com/storage/browser">存儲</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {#                <li><a href="{{ url_for('admin') }}">管理</a></li>#}
+            </ul>
+
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        {#        <div class="col-md-12">#}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'message' %}
+                        <div class="alert alert-warning" role="alert">{{ message }}</div>
+                    {% else %}
+                        <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+
+                    {% endif %}
+
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {#        </div><!-- "col-md-12  message -->#}
+    </div> <!-- row  -->
+    <div class="row">
+        <div class="col-md-12" id="content">
+            {% block content %}
+            {% endblock %}
+        </div><!-- "col-md-12  content -->
+    </div><!-- row  -->
+</div> <!-- container  -->
+
+
+<footer class="footer">
+    <div class="container">
+        {#        <p class="text-muted">&copy; 2010-{{ config.PROCESS_TIME.strftime('%Y') }} <a href="https://liantian.me/">#}
+        {#            liantian</a></p>#}
+    </div>
+</footer>
+
+
+
+{% block extend_js %}
+{% endblock %}
+
+<script language="JavaScript">
+    $(document).ready(function () {
+        $(function () {
+            function stripTrailingSlash(str) {
+                if (str.substr(-1) == '/') {
+                    return str.substr(0, str.length - 1);
+                }
+                return str;
+            }
+
+            var url = window.location.pathname;
+            var activePage = stripTrailingSlash(url);
+            $('.nav li a').each(function () {
+                var currentPage = stripTrailingSlash($(this).attr('href'));
+                if (activePage == currentPage) {
+                    $(this).parent().addClass('active');
+                }
+            });
+        });
+    });
+</script>
+{% block extend_script %}
+{% endblock %}
+
+</body>
+</html>

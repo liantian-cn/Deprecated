@@ -1,0 +1,7 @@
+{
+    "code": "local spellInfo = C_Spell.GetSpellInfo(spellName)\nif not spellInfo then\n    -- \u5982\u679c\u6280\u80fd\u4fe1\u606f\u4e0d\u5b58\u5728\uff0c\u6253\u5370\u9519\u8bef\u4fe1\u606f\u5e76\u8fd4\u56de\n    return print(\"\u6280\u80fd\u540d\u79f0 >\" .. spellName .. \"< \u4e0d\u5b58\u5728\")\nend\nlocal spellCooldownInfo = C_Spell.GetSpellCooldown(spellInfo.spellID)\n\n    -- \u5982\u679c\u6280\u80fd\u6ca1\u6709\u51b7\u5374\u65f6\u95f4\uff0c\u8fd4\u56de true\nif spellCooldownInfo.duration == 0 then\n    return 0\nelse\n    -- \u8ba1\u7b97\u6280\u80fd\u5269\u4f59\u51b7\u5374\u65f6\u95f4\n    local remaining = spellCooldownInfo.startTime + spellCooldownInfo.duration - GetTime()\n    return remaining/1000\nend",
+    "desc": "",
+    "func_args": [
+        "spellName"
+    ]
+}

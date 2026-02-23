@@ -1,0 +1,13 @@
+
+queue:
+- name: fetch-queue
+  rate: 10/m
+  max_concurrent_requests: 50
+
+- name: collect-queue
+  rate: 6/m
+  max_concurrent_requests: 400
+
+- name: push-msg-queue
+  rate: 3/m
+  max_concurrent_requests: 100

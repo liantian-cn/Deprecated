@@ -1,0 +1,44 @@
+{% extends "layer/base.html" %}
+
+{% block title %}{{ config.SITE_NAME }}{% endblock %}
+
+
+{% block main %}
+
+
+    {% for post in posts %}
+
+
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+            <h2 class="post-title" itemprop="name headline"><a itemprop="url" href="{{ url_for("post",slug=post.slug) }}">{{ post.title }}</a></h2>
+            <ul class="post-meta">
+                <li itemprop="author" itemscope itemtype="http://schema.org/Person">作者: <a itemprop="name" rel="author">{{ config.SITE_AUTHOR }}</a></li>
+                <li>时间:
+                    <time datetime="{{ post.modified.isoformat() }}" itemprop="datePublished">{{ post.modified.strftime(config.SITE_POST_DATETIME_FORMAT) }}</time>
+                </li>
+                <li>分類: {{ post.get_category_display }}</li>
+                <li itemprop="interactionCount"><a itemprop="discussionUrl" href="{{ url_for("post",slug=post.slug) }}#disqus_thread" data-disqus-identifier="{{ post.key.urlsafe() }}"></a></li>
+            </ul>
+            <div class="post-content" itemprop="articleBody">
+                {{ post.text|md_summary|safe }}
+            </div>
+        </article>
+
+
+
+    {% endfor %}
+    <ol class="page-navigator">
+        {% if cursor %}
+            <li class="prev"><a href="javascript:history.back()">&laquo; 前一页</a></li>
+        {% endif %}
+
+
+        {% if more %}
+
+            <li class="next"><a href="{{ url_for("index") }}?cursor={{ next_cursor.urlsafe() }}">后一页 &raquo;</a></li>
+        {% endif %}
+
+    </ol>
+
+
+{% endblock %}

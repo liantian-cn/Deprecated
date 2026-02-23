@@ -1,0 +1,5 @@
+{
+    "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u7b26\u6587\u5203\u821e\")\nlocal spellCooldownInfo = C_Spell.GetSpellCooldown(spellInfo.spellID)\n\nif spellCooldownInfo.duration == 0 then\n    return 0\nelse\n    return spellCooldownInfo.startTime + spellCooldownInfo.duration - GetTime()\nend",
+    "desc": "",
+    "func_args": []
+}

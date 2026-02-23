@@ -1,0 +1,5 @@
+{
+    "code": "return not UnitExists(\"target\")",
+    "desc": "",
+    "func_args": []
+}

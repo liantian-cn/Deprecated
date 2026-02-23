@@ -1,0 +1,8 @@
+{
+    "code": "    local spellInfo = C_Spell.GetSpellInfo(spell_name)\n    return C_Spell.IsSpellInRange(spellInfo.spellID, targetUnit)",
+    "desc": "",
+    "func_args": [
+        "spell_name",
+        "targetUnit"
+    ]
+}

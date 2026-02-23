@@ -1,0 +1,5 @@
+{
+    "code": "return UnitPowerMax(\"player\", Enum.PowerType.Fury) - UnitPower(\"player\", Enum.PowerType.Fury)",
+    "desc": "",
+    "func_args": []
+}

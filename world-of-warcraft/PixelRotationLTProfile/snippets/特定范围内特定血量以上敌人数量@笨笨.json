@@ -1,0 +1,8 @@
+{
+    "code": "local function isUnitInRange(unit, range)\n    local getRange = {\n        { 5, 37727 },\n        { 6, 63427 },\n        { 8, 34368 },\n        { 10, 32321 },\n        { 15, 33069 },\n        { 20, 10645 },\n        { 25, 24268 },\n        { 30, 835 },\n        { 35, 24269 },\n        { 40, 28767 },\n        { 45, 23836 },\n        { 50, 116139 },\n        { 60, 32825 },\n        { 70, 41265 },\n        { 80, 35278 },\n        { 100, 33119 },\n    }\n    for _, rangeData in ipairs(getRange) do\n        local maxRange, itemID = unpack(rangeData)\n        if maxRange == range then\n            return C_Item.IsItemInRange(itemID, unit)\n        end\n    end\n    return false\nend\n\nlocal inRange, unitID = 0\nfor _, plate in pairs(C_NamePlate.GetNamePlates()) do\n    unitID = plate.namePlateUnitToken\n    if UnitCanAttack(\"player\", unitID) then\n        if isUnitInRange(unitID, mob_range) then\n            if UnitHealth(unitID) > mob_health  then\n                inRange = inRange + 1\n            end\n        end\n    end\nend\nreturn inRange",
+    "desc": "",
+    "func_args": [
+        "mob_range",
+        " mob_health"
+    ]
+}

@@ -1,0 +1,48 @@
+docker build --tag mitsuki:latest  .
+
+
+docker create \
+    -p 33022:22 \
+    -p 1080:1080 \
+    -p 33080:8000 \
+    --log-driver local \
+    --log-opt max-size=10m \
+    --log-opt max-file=3 \
+    --log-opt compress=true \
+    --restart always  \
+    --name Mitsuki \
+    mitsuki:latest
+
+docker export Mitsuki  > Mitsuki.export.tar
+
+docker start  Mitsuki
+
+
+
+docker exec -it Mitsuki bash
+
+
+
+
+
+
+
+
+
+
+docker import Mitsuki.export.tar mitsuki:latest 
+
+
+docker create \
+    -p 33022:22 \
+    -p 33010:1080 \
+    -p 33080:8000 \
+    --log-driver local \
+    --log-opt max-size=10m \
+    --log-opt max-file=3 \
+    --log-opt compress=true \
+    --restart always  \
+    --name Mitsuki \
+    mitsuki:latest \
+    /usr/bin/supervisord
+

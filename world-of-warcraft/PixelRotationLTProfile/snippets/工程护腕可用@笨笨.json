@@ -1,0 +1,5 @@
+{
+    "code": "local _, duration, enable = C_Container.GetItemCooldown(GetInventoryItemID(\"player\", 9))\nreturn (enable == 1) and (duration == 0)",
+    "desc": "",
+    "func_args": []
+}

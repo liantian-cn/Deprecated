@@ -1,0 +1,5 @@
+{
+    "code": "if PixelRotationLT.IsBurst() then\n    return true\nend\n\nif UnitExists(\"target\") then\n    if (UnitLevel(\"target\") == -1) or (UnitLevel(\"target\") >= 82) then\n        if (UnitHealth(\"player\") / UnitHealthMax(\"player\") *100) > 15 then\n            return true\n         end\n    end\nend\n\nreturn false",
+    "desc": "",
+    "func_args": []
+}

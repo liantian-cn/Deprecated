@@ -1,0 +1,84 @@
+{% extends "admin/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+    <div class="row">
+
+        <div class="col-md-12">
+            <table class="table table-hover  table-condensed">
+                <thead>
+                <tr>
+                    <th>分類</th>
+                    {#                    <th>描述</th>#}
+                    <th>縮略名</th>
+                    {% if parent == None %}
+                        <th>子分類</th>
+                    {% endif %}
+                    <th>文章數</th>
+                    <th></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.title }}</td>
+                        <td>{{ category.slug }}</td>
+                        {% if parent == None %}
+                            <td><a href="{{ url_for("admin.category.list") }}?parent={{ category.key.urlsafe() }}">{{ category.child_count }}</a></td>
+                        {% endif %}
+
+                        <td>{{ category.post_count }}</td>
+                        <td><a href="{{ url_for("admin.category.delete", key=category.key.urlsafe()) }}" class="btn btn-sm btn-warning" data-toggle="confirmation" data-title="確定刪除麽？"><span class="glyphicon glyphicon-floppy-remove"
+                                                                                                                                                                                             aria-hidden="true"></span> 刪除</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-12">
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                新增
+            </button>
+
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">新增分類</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{ wtf.quick_form(form, action=url_for('admin.category.list'), method="post", extra_classes=None, role="form", form_type="baisc", enctype="multipart/form-data", button_map={}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+
+
+{% block extend_js %}
+
+    <script language="JavaScript">
+        $(document).ready(function () {
+            $('[data-toggle=confirmation]').confirmation({
+                rootSelector: '[data-toggle=confirmation]',
+                // other options
+            });
+        });
+    </script>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+docker build -t xiaomihome -f DockerFile .
+
+
+docker run -it --rm --network host  -v /data/hdd1/cfg/container/MiHome/config.json:/app/config.json    xiaomihome
+
+
+docker create --name XiaoMIHome    --restart unless-stopped  -v /data/hdd1/cfg/container/MiHome/config.json:/app/config.json  --network host   xiaomihome
+
+
+docker start XiaoMIHome
+
+docker exec -it XiaoMIHome python /app/main.py
+
+docker restart XiaoMIHome
+
+docker logs -f XiaoMIHome
+
+
+docker stop XiaoMIHome
+docker rm XiaoMIHome
+docker rmi  xiaomihome

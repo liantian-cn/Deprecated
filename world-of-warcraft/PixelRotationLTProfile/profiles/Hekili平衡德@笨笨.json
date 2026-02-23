@@ -1,0 +1,858 @@
+{
+    "rotation": "if not Prop(\"\u73a9\u5bb6\u5728\u6218\u6597\u4e2d\") then\n    return Idle(\"\u73a9\u5bb6\u4e0d\u5728\u6218\u6597\")\nend\n\nif Prop(\"\u73a9\u5bb6\u5b58\u5728Debuff\", \"\u6293\u63e1\u4e4b\u8840\") then\n    return Idle(\"\u95f2\u7f6e\")\nend\n\nif Prop(\"\u5728\u5750\u9a91\u4e0a\") then\n    return Idle(\"\u5728\u5750\u9a91\u4e0a\")\nend\n\nif Prop(\"\u76ee\u6807\u662f\u73a9\u5bb6\") then\n    return Idle(\"\u76ee\u6807\u662f\u73a9\u5bb6\")\nend\n\nif Prop(\"\u76ee\u6807\u4e3a\u7a7a\") then\n    return Idle(\"\u76ee\u6807\u4e3a\u7a7a\")\nend\n\n\nif Hekili.DB.profile.enabled == false then\n    Hekili:Toggle()\nend\n\nif Hekili.DB.profile.toggles.mode.value ~= \"automatic\" then\n    Hekili.DB.profile.toggles.mode.value = \"automatic\"\n    Hekili:UpdateDisplayVisibility()\n    Hekili:ForceUpdate(\"HEKILI_TOGGLE\", true)\nend\n\nlocal ability_id, err, info = Hekili_GetRecommendedAbility(\"Primary\", 1)  -- luacheck: ignore\nif ability_id == nil then\n    return Idle(\"\u6ca1\u6709\u63a8\u8350\u6280\u80fd\")\nend\nif ability_id <= 0 then\n    ability_id, err, info = Hekili_GetRecommendedAbility(\"Primary\", 2)  -- luacheck: ignore\n    if ability_id <= 0 then\n        ability_id, err, info = Hekili_GetRecommendedAbility(\"Primary\", 3)  -- luacheck: ignore\n        if ability_id <= 0 then\n            return Idle(\"\u6ca1\u6709\u63a8\u8350\u6280\u80fd\")\n        end\n    end\nend\n\n\nif ability_id == 1126 then\n    return Cast(\"\u91ce\u6027\u5370\u8bb0\")\nelseif ability_id == 24858 then\n    return Cast(\"\u67ad\u517d\u5f62\u6001\")\nelseif ability_id == 102793 then\n    return Cast(\"\u4e4c\u7d22\u5c14\u65cb\u98ce\")\nelseif ability_id == 5487 then\n    return Cast(\"\u718a\u5f62\u6001\")\nelseif ability_id == 8921 then\n    return Cast(\"\u6708\u706b\u672f\")\nelseif ability_id == 194153 then\n    return Cast(\"\u661f\u706b\u672f\")\nelseif ability_id == 202425 then\n    return Cast(\"\u827e\u9732\u6069\u7684\u6218\u58eb\")\nelseif ability_id == 93402 then\n    return Cast(\"\u9633\u708e\u672f\")\nelseif ability_id == 190984 then\n    return Cast(\"\u6124\u6012\")\nelseif ability_id == 102560 then\n    return Cast(\"\u8d85\u51e1\u4e4b\u76df\")\nelseif ability_id == 194223 then\n    return Cast(\"\u8d85\u51e1\u4e4b\u76df\")\nelseif ability_id == 391528 then\n    return Cast(\"\u4e07\u7075\u4e4b\u53ec\")\nelseif ability_id == 191034 then\n    return Cast(\"\u661f\u8fb0\u5760\u843d\")\nelseif ability_id == 202770 then\n    return Cast(\"\u827e\u9732\u6069\u4e4b\u6012\")\nelseif ability_id == 274281 then\n    return Cast(\"\u65b0\u6708\")\nelseif ability_id == 274282 then\n    return Cast(\"\u65b0\u6708\")\nelseif ability_id == 274283 then\n    return Cast(\"\u65b0\u6708\")\nelseif ability_id == 20484 then\n    return Cast(\"\u590d\u751f\")\nelseif ability_id == 78674 then\n    return Cast(\"\u661f\u6d8c\u672f\")\nelseif ability_id == 78675 then\n    return Cast(\"\u65e5\u5149\u672f\")\nelseif ability_id == 29166 then\n    return Cast(\"\u6fc0\u6d3b\")\nelseif ability_id == 108238 then\n    return Cast(\"\u7518\u9716\")\nelseif ability_id == 2782 then\n    return Cast(\"\u6e05\u9664\u8150\u8680\")\nelseif ability_id == 22812 then\n    return Cast(\"\u6811\u76ae\u672f\")\nelseif ability_id == 8936 then\n    return Cast(\"\u6108\u5408\")\nelseif ability_id == 2908 then\n    return Cast(\"\u5b89\u629a\")\nelseif ability_id == 774 then\n    return Cast(\"\u56de\u6625\u672f\")\nelseif ability_id == 88747 then\n    return Cast(\"\u91ce\u6027\u8611\u83c7\")\nelseif ability_id == 124974 then\n    return Cast(\"\u81ea\u7136\u7684\u5b88\u62a4\")\nelseif ability_id == 205636 then\n    return Cast(\"\u81ea\u7136\u4e4b\u529b\")\nelseif ability_id == 202347 then\n    return Cast(\"\u661f\u8fb0\u8000\u6591\")\nelseif ability_id == 209749 then\n    return Cast(\"\u7cbe\u7075\u866b\u7fa4\")\nend\n\n\n-- /dump Hekili_GetRecommendedAbility(\"Primary\", 1)",
+    "properties": {
+        "\u73a9\u5bb6\u8840\u91cf": {
+            "code": "return  UnitHealth(\"player\") / UnitHealthMax(\"player\") *100",
+            "desc": "\u8fd4\u56de\u8840\u91cf\u7684\u767e\u5206\u6bd4\u6570\u503c",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_srFVipCx"
+        },
+        "\u7b26\u6587\u80fd\u91cf": {
+            "code": "return  UnitPower(\"player\", Enum.PowerType.RunicPower)",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_szKfMTjb"
+        },
+        "\u7cbe\u9ad3\u5206\u88c2\u5728\u65bd\u6cd5\u8ddd\u79bb": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u7cbe\u9ad3\u5206\u88c2\")\nreturn C_Spell.IsSpellInRange(spellInfo.spellID, \"target\")",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_EYGliTOH"
+        },
+        "\u7b26\u6587\u6570": {
+            "code": "local spellCooldownInfo = C_Spell.GetSpellCooldown(61304)\nlocal gcd_remaining\nif spellCooldownInfo.duration == 0 then\n    gcd_remaining = 0\nelse\n    gcd_remaining =  spellCooldownInfo.startTime + spellCooldownInfo.duration - GetTime()\nend\n\nlocal amount = 0\nfor i = 1, 6 do\n    local start, duration, runeReady = GetRuneCooldown(i)\n    if runeReady then\n        amount = amount + 1\n    else\n        -- \u5982\u679c\u7b26\u6587\u51b7\u5374\u5c0f\u4e8eGCD\uff0c\u4e5f\u7b97\n        if (start+duration-GetTime()) < gcd_remaining then\n            amount = amount + 1\n        end\n    end\nend\nreturn amount",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_dsPPnuZv"
+        },
+        "\u5fc3\u7075\u51b0\u51bb\u5728\u65bd\u6cd5\u8303\u56f4": {
+            "code": "",
+            "desc": "",
+            "used": false
+        },
+        "\u8840\u6db2\u6cb8\u817e\u5145\u80fd": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u8840\u6db2\u6cb8\u817e\")\nlocal chargeInfo = C_Spell.GetSpellCharges(spellInfo.spellID)\nreturn chargeInfo.currentCharges",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_cuKSaCss"
+        },
+        "\u76ee\u6807\u8840\u4e4b\u75ab\u75c5\u5269\u4f59\u65f6\u95f4": {
+            "code": "local aura  = C_UnitAuras.GetAuraDataBySpellName(\"target\", \"\u8840\u4e4b\u75ab\u75c5\",\"HARMFUL|PLAYER\")\nif aura  then\n    local remaining = aura.expirationTime - GetTime()\n    return math.max(remaining, 0)\nend\nreturn 0",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_BPXKxCRT"
+        },
+        "\u5b58\u5728\u6293\u63e1\u4e4b\u8840": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u6293\u63e1\u4e4b\u8840\",\"HARMFUL\")\nif aura then\n    return true\nend\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_hDHgVbyI"
+        },
+        "\u5728\u5750\u9a91\u4e0a": {
+            "code": "return IsMounted()",
+            "desc": "",
+            "func_args": [],
+            "used": true,
+            "func_name": "p_lQOymJqG"
+        },
+        "\u76ee\u6807\u662f\u73a9\u5bb6": {
+            "code": "return UnitIsPlayer(\"target\")",
+            "desc": "",
+            "func_args": [],
+            "used": true,
+            "func_name": "p_wvubjiHc"
+        },
+        "\u73a9\u5bb6\u5728\u6218\u6597\u4e2d": {
+            "code": "return UnitAffectingCombat(\"player\")",
+            "desc": "",
+            "func_args": [],
+            "used": true,
+            "func_name": "p_euCuGQlf"
+        },
+        "\u76ee\u6807\u4e3a\u7a7a": {
+            "code": "return not UnitExists(\"target\")",
+            "desc": "",
+            "func_args": [],
+            "used": true,
+            "func_name": "p_pjqSCJtP"
+        },
+        "\u767d\u9aa8\u4e4b\u76fe\u5c42\u6570": {
+            "code": "local aura =  C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u767d\u9aa8\u4e4b\u76fe\" , \"HELPFUL\")\nif aura then\n    return aura.applications\nelse\n    return 0\nend",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_IVtzhhvz"
+        },
+        "\u767d\u9aa8\u4e4b\u76fe\u6301\u7eed\u65f6\u95f4": {
+            "code": "local aura =  C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u767d\u9aa8\u4e4b\u76fe\" , \"HELPFUL\")\n\nif aura then\n    local remaining = aura.expirationTime - GetTime()\n    return math.max(remaining, 0)\nend\nreturn 0",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_tCUkUxaN"
+        },
+        "\u6709\u7834\u706dBuff": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u7834\u706d\",\"HELPFUL|PLAYER\")\nif aura then\n    return true\nend\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_DaSvgJSR"
+        },
+        "\u76ee\u6807\u8840\u91cf": {
+            "code": "return  UnitHealth(\"target\") / UnitHealthMax(\"target\") *100",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_fQTftKQX"
+        },
+        "\u5de5\u7a0b\u62a4\u8155\u53ef\u7528": {
+            "code": "local _, duration, enable = C_Container.GetItemCooldown(GetInventoryItemID(\"player\", 9))\nreturn (enable == 1) and (duration == 0)",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_GuwHqmQc"
+        },
+        "\u76ee\u6807\u91ca\u653e\u5c16\u523a": {
+            "code": "local monster_key_skill = {\n\"\u9ed1\u66dc\u5149\u675f\",\n\"\u56bc\u788e\"\n}\n\nlocal spell_name, _ = UnitCastingInfo(\"target\")\nif spell_name == nil then\n    spell_name, _ = UnitChannelInfo(\"target\")\n    if spell_name == nil then\n        return false\n    end\nend\nfor _, value in ipairs(monster_key_skill) do\n    if value == spell_name then\n        return true\n    end\nend\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_DOBqjiYM"
+        },
+        "\u7126\u70b9\u53ef\u4ee5\u6253\u65ad": {
+            "code": "local key_spell_id_list = {\n    322938, -- \u4ed9\u6797,\u6536\u5272\u7cbe\u9b42\n    323057, -- \u4ed9\u6797,BOSS1\n    324776, -- \u4ed9\u6797,\u6728\u68d8\u5916\u58f3\n    324914, -- \u4ed9\u6797,\u6ecb\u517b\u68ee\u6797\n    321828, -- \u4ed9\u6797,\u62cd\u624b\u624b\n    326046, -- \u4ed9\u6797,\u6a21\u62df\u6297\u6027\n    340544, -- \u4ed9\u6797,\u518d\u751f\u9f13\u821e\n    443430, -- \u5343\u4e1d\u4e4b\u57ce, \u6d41\u4e1d\u7f20\u7f1a\n    443443, -- \u5343\u4e1d\u4e4b\u57ce, \u626d\u66f2\u601d\u7eea\n    446086, -- \u5343\u4e1d\u4e4b\u57ce, \u865a\u7a7a\u4e4b\u6ce2\n    434793, -- \u56de\u54cd\u4e4b\u57ce, \u5171\u632f\u5f39\u5e55\n    434802, -- \u56de\u54cd\u4e4b\u57ce, \u60ca\u60e7\u5c16\u9e23\n    448248, -- \u56de\u54cd\u4e4b\u57ce, \u6076\u81ed\u9f50\u5c04\n    433841, -- \u56de\u54cd\u4e4b\u57ce, \u6bd2\u6db2\u5251\u96e8\n    451871, -- \u683c\u745e\u59c6\u5df4\u6258,\u5267\u70c8\u9707\u98a4\n    76711, -- \u683c\u745e\u59c6\u5df4\u6258,\u707c\u70e7\u5fc3\u667a\n    451224, -- \u683c\u745e\u59c6\u5df4\u6258,\u6697\u5f71\u70c8\u7130\u7b3c\u7f69\n    431309, -- \u7834\u6668\u53f7,\u8bf1\u6355\u6697\u5f71\n    450756, -- \u7834\u6668\u53f7,\u6df1\u6e0a\u55e5\u53eb\n    431333, -- \u7834\u6668\u53f7,\u6298\u78e8\u5c04\u7ebf\n    432520, -- \u7834\u6668\u53f7,\u6697\u5f71\u5c4f\u969c\n    449455, -- \u77f6\u77f3\u5b9d\u5e93,\u5486\u54ee\u6050\u60e7\n    445207, -- \u77f6\u77f3\u5b9d\u5e93,\u7a7f\u900f\u54c0\u568e\n    429545, -- \u77f6\u77f3\u5b9d\u5e93,\u5664\u58f0\u9f7f\u8f6e\n    429109, -- \u77f6\u77f3\u5b9d\u5e93,\u6108\u5408\u91d1\u5c5e\n    430097, -- \u77f6\u77f3\u5b9d\u5e93,\u878d\u94c1\u4e4b\u6c34\n    256957, -- \u56f4\u653b\u4f2f\u62c9\u52d2\u65af,\u9632\u6c34\u7532\u58f3\n    454440, -- \u56f4\u653b\u4f2f\u62c9\u52d2\u65af,\u6076\u81ed\u55b7\u5410\n    272571, -- \u56f4\u653b\u4f2f\u62c9\u52d2\u65af,\u7a92\u606f\u4e4b\u6c34\n    334748, -- \u901a\u7075\u6218\u6f6e,\u6392\u5e72\u4f53\u6db2\n    320462, -- \u901a\u7075\u6218\u6f6e,\u901a\u7075\u7bad\n    324293, -- \u901a\u7075\u6218\u6f6e,\u523a\u8033\u5c16\u5578\n    327127, -- \u901a\u7075\u6218\u6f6e,\u4fee\u590d\u8840\u8089\n    462802, -- \u4e3b\u673a\u89c9\u9192,\u51c0\u5316\u70c8\u7130\n    450449, -- \uff1f\uff1f\n    450914, -- \uff1f\uff1f\n\n}\n\nlocal _, _, _, _, _, _, notInterruptible, spellId, _, _ = UnitChannelInfo(\"focus\")\nif spellId == nil then\n    _, _, _, _, _, _, _, notInterruptible, spellId = UnitCastingInfo(\"focus\")\n    if spellId == nil then\n        return false\n    end\nend\n\nif notInterruptible then\n    return false\nend\n\nfor _, v in ipairs(key_spell_id_list) do\n    if v == spellId then\n        return true\n    end\nend\n\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_KDRDmmaU"
+        },
+        "\u76ee\u6807\u53ef\u4ee5\u6253\u65ad": {
+            "code": "local key_spell_id_list = {\n    322938, -- \u4ed9\u6797,\u6536\u5272\u7cbe\u9b42\n    323057, -- \u4ed9\u6797,BOSS1\n    324776, -- \u4ed9\u6797,\u6728\u68d8\u5916\u58f3\n    324914, -- \u4ed9\u6797,\u6ecb\u517b\u68ee\u6797\n    321828, -- \u4ed9\u6797,\u62cd\u624b\u624b\n    326046, -- \u4ed9\u6797,\u6a21\u62df\u6297\u6027\n    340544, -- \u4ed9\u6797,\u518d\u751f\u9f13\u821e\n    443430, -- \u5343\u4e1d\u4e4b\u57ce, \u6d41\u4e1d\u7f20\u7f1a\n    443443, -- \u5343\u4e1d\u4e4b\u57ce, \u626d\u66f2\u601d\u7eea\n    446086, -- \u5343\u4e1d\u4e4b\u57ce, \u865a\u7a7a\u4e4b\u6ce2\n    434793, -- \u56de\u54cd\u4e4b\u57ce, \u5171\u632f\u5f39\u5e55\n    434802, -- \u56de\u54cd\u4e4b\u57ce, \u60ca\u60e7\u5c16\u9e23\n    448248, -- \u56de\u54cd\u4e4b\u57ce, \u6076\u81ed\u9f50\u5c04\n    433841, -- \u56de\u54cd\u4e4b\u57ce, \u6bd2\u6db2\u5251\u96e8\n    451871, -- \u683c\u745e\u59c6\u5df4\u6258,\u5267\u70c8\u9707\u98a4\n    76711, -- \u683c\u745e\u59c6\u5df4\u6258,\u707c\u70e7\u5fc3\u667a\n    451224, -- \u683c\u745e\u59c6\u5df4\u6258,\u6697\u5f71\u70c8\u7130\u7b3c\u7f69\n    431309, -- \u7834\u6668\u53f7,\u8bf1\u6355\u6697\u5f71\n    450756, -- \u7834\u6668\u53f7,\u6df1\u6e0a\u55e5\u53eb\n    431333, -- \u7834\u6668\u53f7,\u6298\u78e8\u5c04\u7ebf\n    432520, -- \u7834\u6668\u53f7,\u6697\u5f71\u5c4f\u969c\n    449455, -- \u77f6\u77f3\u5b9d\u5e93,\u5486\u54ee\u6050\u60e7\n    445207, -- \u77f6\u77f3\u5b9d\u5e93,\u7a7f\u900f\u54c0\u568e\n    429545, -- \u77f6\u77f3\u5b9d\u5e93,\u5664\u58f0\u9f7f\u8f6e\n    429109, -- \u77f6\u77f3\u5b9d\u5e93,\u6108\u5408\u91d1\u5c5e\n    430097, -- \u77f6\u77f3\u5b9d\u5e93,\u878d\u94c1\u4e4b\u6c34\n    256957, -- \u56f4\u653b\u4f2f\u62c9\u52d2\u65af,\u9632\u6c34\u7532\u58f3\n    454440, -- \u56f4\u653b\u4f2f\u62c9\u52d2\u65af,\u6076\u81ed\u55b7\u5410\n    272571, -- \u56f4\u653b\u4f2f\u62c9\u52d2\u65af,\u7a92\u606f\u4e4b\u6c34\n    334748, -- \u901a\u7075\u6218\u6f6e,\u6392\u5e72\u4f53\u6db2\n    320462, -- \u901a\u7075\u6218\u6f6e,\u901a\u7075\u7bad\n    324293, -- \u901a\u7075\u6218\u6f6e,\u523a\u8033\u5c16\u5578\n    327127, -- \u901a\u7075\u6218\u6f6e,\u4fee\u590d\u8840\u8089\n    462802, -- \u4e3b\u673a\u89c9\u9192,\u51c0\u5316\u70c8\u7130\n    450449, -- \uff1f\uff1f\n    450914, -- \uff1f\uff1f\n\n}\n\nlocal _, _, _, _, _, _, notInterruptible, spellId, _, _ = UnitChannelInfo(\"target\")\nif spellId == nil then\n    _, _, _, _, _, _, _, notInterruptible, spellId = UnitCastingInfo(\"target\")\n    if spellId == nil then\n        return false\n    end\nend\n\nif notInterruptible then\n    return false\nend\n\nfor _, v in ipairs(key_spell_id_list) do\n    if v == spellId then\n        return true\n    end\nend\n\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_NefblEns"
+        },
+        "\u8428\u83b1\u56e0\u5929\u8d4b": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u5438\u8840\u9b3c\u6253\u51fb\")\nif spellInfo then\n    return true\nelse\n    return false\nend",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_omdcpOjS"
+        },
+        "\u5b58\u5728\u7b26\u6587\u5203\u821eBuff": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u7b26\u6587\u5203\u821e\",\"HELPFUL|PLAYER\")\nif aura then\n    return true\nend\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_VwPUSFcI"
+        },
+        "\u67af\u840e\u51cb\u96f6\u6301\u7eed\u65f6\u95f4": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u67af\u840e\u51cb\u96f6\",\"HELPFUL|PLAYER\")\nlocal remaining = 0\nif aura then\n    if aura.duration > 4 then\n            -- \u4e8c\u6bb5\u51cb\u96f6+4\u79d2\n        remaining = aura.expirationTime - GetTime() + 4\n    else\n        remaining = aura.expirationTime - GetTime()\n    end\n    return math.max(remaining, 0)\nelse\n    return remaining\nend",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_lIVOOGQQ"
+        },
+        "\u67af\u840e\u51cb\u96f6\u5145\u80fd": {
+            "code": "local chargeInfo = C_Spell.GetSpellCharges(\"\u67af\u840e\u51cb\u96f6\")\nreturn chargeInfo.currentCharges",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_bwzpOfQL"
+        },
+        "\u6b7b\u4ea1\u4f7f\u8005\u5929\u8d4b": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u6b7b\u795e\u5370\u8bb0\")\nif spellInfo then\n    return true\nelse\n    return false\nend",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_FdFpqYul"
+        },
+        "10\u7801\u51851000000\u8840\u4ee5\u4e0a\u654c\u4eba": {
+            "code": "local function isUnitInRange(unit, range)\n    local getRange = {\n        { 5, 37727 },\n        { 6, 63427 },\n        { 8, 34368 },\n        { 10, 32321 },\n        { 15, 33069 },\n        { 20, 10645 },\n        { 25, 24268 },\n        { 30, 835 },\n        { 35, 24269 },\n        { 40, 28767 },\n        { 45, 23836 },\n        { 50, 116139 },\n        { 60, 32825 },\n        { 70, 41265 },\n        { 80, 35278 },\n        { 100, 33119 },\n    }\n    for _, rangeData in ipairs(getRange) do\n        local maxRange, itemID = unpack(rangeData)\n        if maxRange == range then\n            return C_Item.IsItemInRange(itemID, unit)\n        end\n    end\n    return false\nend\n\nlocal inRange, unitID = 0\nfor _, plate in pairs(C_NamePlate.GetNamePlates()) do\n    unitID = plate.namePlateUnitToken\n    --if UnitCanAttack(\"player\", unitID) and UnitAffectingCombat(unitID) and UnitIsEnemy(\"player\", unitID) then\n    if UnitCanAttack(\"player\", unitID) then\n        if isUnitInRange(unitID, 10) then\n            if UnitHealth(unitID) > 1000000  then\n                inRange = inRange + 1\n            end\n        end\n    end\nend\nreturn inRange",
+            "desc": "",
+            "used": false,
+            "func_name": "p_AQpdIVGA"
+        },
+        "\u7126\u70b9\u76ee\u6807\u5728\u5fc3\u7075\u51b0\u51bb\u5728\u65bd\u6cd5\u8303\u56f4": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u5fc3\u7075\u51b0\u51bb\")\nreturn C_Spell.IsSpellInRange(spellInfo.spellID, \"focus\")",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_nQUcQFLD"
+        },
+        "\u76ee\u6807\u518d\u5fc3\u7075\u51b0\u51bb\u5728\u65bd\u6cd5\u8303\u56f4": {
+            "code": "",
+            "desc": "",
+            "used": false
+        },
+        "\u76ee\u6807\u8840\u91cf\u7edd\u5bf9\u503c": {
+            "code": "return UnitHealth(\"target\")",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_aXXBPSVi"
+        },
+        "\u7126\u70b9\u76ee\u6807\u654c\u5bf9": {
+            "code": "return UnitCanAttack(\"player\", \"focus\")",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_GdJCQiSv"
+        },
+        "\u76ee\u6807\u654c\u5bf9": {
+            "code": "return UnitCanAttack(\"player\", \"target\")",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_cNNLgXmp"
+        },
+        "\u76ee\u6807\u5728\u5fc3\u7075\u51b0\u51bb\u5728\u65bd\u6cd5\u8303\u56f4": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u5fc3\u7075\u51b0\u51bb\")\nreturn C_Spell.IsSpellInRange(spellInfo.spellID, \"target\")",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_LZUtUuAS"
+        },
+        "\u6709\u8d64\u8272\u5929\u707ebuff": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u8d64\u8272\u5929\u707e\",\"HELPFUL|PLAYER\")\nif aura then\n    return true\nend\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_hnPzkiRg"
+        },
+        "\u5728\u7206\u53d1\u4e2d": {
+            "code": "return PixelRotationLT.IsBurst()",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_TYPJTSkg"
+        },
+        "\u5f53\u524d\u79fb\u52a8\u901f\u5ea6": {
+            "code": "local currentSpeed, _ = GetUnitSpeed(\"player\")\nreturn currentSpeed",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_eYgEmuNG"
+        },
+        "\u6709\u5438\u8840\u9b3c\u4e4b\u8840buff": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u5438\u8840\u9b3c\u4e4b\u8840\",\"HELPFUL|PLAYER\")\nif aura then\n    return true\nend\nreturn false",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_lhEpRlSL"
+        },
+        "10\u7801\u518525000000\u8840\u4ee5\u4e0a\u654c\u4eba": {
+            "code": "local function isUnitInRange(unit, range)\n    local getRange = {\n        { 5, 37727 },\n        { 6, 63427 },\n        { 8, 34368 },\n        { 10, 32321 },\n        { 15, 33069 },\n        { 20, 10645 },\n        { 25, 24268 },\n        { 30, 835 },\n        { 35, 24269 },\n        { 40, 28767 },\n        { 45, 23836 },\n        { 50, 116139 },\n        { 60, 32825 },\n        { 70, 41265 },\n        { 80, 35278 },\n        { 100, 33119 },\n    }\n    for _, rangeData in ipairs(getRange) do\n        local maxRange, itemID = unpack(rangeData)\n        if maxRange == range then\n            return C_Item.IsItemInRange(itemID, unit)\n        end\n    end\n    return false\nend\n\nlocal inRange, unitID = 0\nfor _, plate in pairs(C_NamePlate.GetNamePlates()) do\n    unitID = plate.namePlateUnitToken\n    --if UnitCanAttack(\"player\", unitID) and UnitAffectingCombat(unitID) and UnitIsEnemy(\"player\", unitID) then\n    if UnitCanAttack(\"player\", unitID) then\n        if isUnitInRange(unitID, 10) then\n            if UnitHealth(unitID) > 25000000  then\n                inRange = inRange + 1\n            end\n        end\n    end\nend\nreturn inRange",
+            "desc": "",
+            "args": [
+                ""
+            ],
+            "used": false,
+            "func_name": "p_ifmPLila"
+        },
+        "5\u7801\u5185100000\u8840\u4ee5\u4e0a\u654c\u4eba": {
+            "code": "local function isUnitInRange(unit, range)\n    local getRange = {\n        { 5, 37727 },\n        { 6, 63427 },\n        { 8, 34368 },\n        { 10, 32321 },\n        { 15, 33069 },\n        { 20, 10645 },\n        { 25, 24268 },\n        { 30, 835 },\n        { 35, 24269 },\n        { 40, 28767 },\n        { 45, 23836 },\n        { 50, 116139 },\n        { 60, 32825 },\n        { 70, 41265 },\n        { 80, 35278 },\n        { 100, 33119 },\n    }\n    for _, rangeData in ipairs(getRange) do\n        local maxRange, itemID = unpack(rangeData)\n        if maxRange == range then\n            return C_Item.IsItemInRange(itemID, unit)\n        end\n    end\n    return false\nend\n\nlocal inRange, unitID = 0\nfor _, plate in pairs(C_NamePlate.GetNamePlates()) do\n    unitID = plate.namePlateUnitToken\n    --if UnitCanAttack(\"player\", unitID) and UnitAffectingCombat(unitID) and UnitIsEnemy(\"player\", unitID) then\n    if UnitCanAttack(\"player\", unitID) then\n        if isUnitInRange(unitID, 5) then\n            if UnitHealth(unitID) > 100000  then\n                inRange = inRange + 1\n            end\n        end\n    end\nend\nreturn inRange",
+            "desc": "",
+            "used": false,
+            "func_name": "p_TxBjoujs"
+        },
+        "X\u7801\u5185Y\u8840\u4ee5\u4e0a\u654c\u4eba": {
+            "code": "-- \u53c2\u6570mob_range,mob_health\n\nlocal function isUnitInRange(unit, range)\n    local getRange = {\n        { 5, 37727 },\n        { 6, 63427 },\n        { 8, 34368 },\n        { 10, 32321 },\n        { 15, 33069 },\n        { 20, 10645 },\n        { 25, 24268 },\n        { 30, 835 },\n        { 35, 24269 },\n        { 40, 28767 },\n        { 45, 23836 },\n        { 50, 116139 },\n        { 60, 32825 },\n        { 70, 41265 },\n        { 80, 35278 },\n        { 100, 33119 },\n    }\n    for _, rangeData in ipairs(getRange) do\n        local maxRange, itemID = unpack(rangeData)\n        if maxRange == range then\n            return C_Item.IsItemInRange(itemID, unit)\n        end\n    end\n    return false\nend\n\nlocal inRange, unitID = 0\nfor _, plate in pairs(C_NamePlate.GetNamePlates()) do\n    unitID = plate.namePlateUnitToken\n    if UnitCanAttack(\"player\", unitID) then\n        if isUnitInRange(unitID, mob_range) then  -- luacheck: ignore\n            if UnitHealth(unitID) > mob_health  then  -- luacheck: ignore\n                inRange = inRange + 1\n            end\n        end\n    end\nend\nreturn inRange",
+            "desc": "",
+            "func_args": [
+                "mob_range",
+                "mob_health"
+            ],
+            "used": false,
+            "func_name": "p_PteYroDD"
+        },
+        "Buff\u5c42\u6570": {
+            "code": "local aura =  C_UnitAuras.GetAuraDataBySpellName(\"player\", buff_name , \"HELPFUL\")\nif aura then\n    return aura.applications\nelse\n    return 0\nend",
+            "desc": "",
+            "func_args": [
+                "buff_name"
+            ],
+            "used": false,
+            "func_name": "p_CwVTMiWs"
+        },
+        "Buff\u5269\u4f59\u65f6\u95f4": {
+            "code": "local aura =  C_UnitAuras.GetAuraDataBySpellName(\"player\" ,buff_name , \"HELPFUL\")\n\nif aura then\n    local remaining = aura.expirationTime - GetTime()\n    return math.max(remaining, 0)\nend\nreturn 0",
+            "desc": "",
+            "func_args": [
+                "buff_name"
+            ],
+            "used": false,
+            "func_name": "p_kdNOvdoP"
+        },
+        "Buff\u5b58\u5728": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", buff_name , \"HELPFUL|PLAYER\")\nif aura then\n    return true\nend\nreturn false",
+            "desc": "",
+            "func_args": [
+                "buff_name"
+            ],
+            "used": false,
+            "func_name": "p_qOHRqnti"
+        },
+        "\u6280\u80fd\u5728\u65bd\u6cd5\u8ddd\u79bb": {
+            "code": "    local spellInfo = C_Spell.GetSpellInfo(spell_name)\n    return C_Spell.IsSpellInRange(spellInfo.spellID, targetUnit)",
+            "desc": "",
+            "func_args": [
+                "spell_name",
+                "targetUnit"
+            ],
+            "used": false,
+            "func_name": "p_FtuFNPbu"
+        },
+        "\u5e94\u5f53\u6253\u65ad": {
+            "code": "return PixelRotationLT.ShouldInterrupt(targetUnit)",
+            "desc": "",
+            "func_args": [
+                "targetUnit"
+            ],
+            "used": false,
+            "func_name": "p_lnrHmSzf"
+        },
+        "\u4e0e\u73a9\u5bb6\u654c\u5bf9": {
+            "code": "return UnitCanAttack(\"player\", targetUnit)",
+            "desc": "",
+            "func_args": [
+                "targetUnit"
+            ],
+            "used": false,
+            "func_name": "p_mYVtuauJ"
+        },
+        "\u6280\u80fd\u5145\u80fd": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(spell_name)\nlocal chargeInfo = C_Spell.GetSpellCharges(spellInfo.spellID)\n\nif chargeInfo.currentCharges == chargeInfo.maxCharges then\n    return chargeInfo.currentCharges\nelse\n    local gcd\n    if cooldownLimit == nil then\n        gcd = PixelRotationLT.GcdRemaining()\n    else\n        gcd = cooldownLimit/1000\n    end\n    local cd = chargeInfo.cooldownStartTime + chargeInfo.cooldownDuration - GetTime()\n    if (cd > gcd) then\n        return chargeInfo.currentCharges\n    else\n        return chargeInfo.currentCharges+1\n    end\nend",
+            "desc": "",
+            "func_args": [
+                "spell_name",
+                "cooldownLimit"
+            ],
+            "used": false,
+            "func_name": "p_NmwutugE"
+        },
+        "\u7279\u5b9a\u8303\u56f4\u5185\u7279\u5b9a\u8840\u91cf\u4ee5\u4e0a\u654c\u4eba\u6570\u91cf": {
+            "code": "local function isUnitInRange(unit, range)\n    local getRange = {\n        { 5, 37727 },\n        { 6, 63427 },\n        { 8, 34368 },\n        { 10, 32321 },\n        { 15, 33069 },\n        { 20, 10645 },\n        { 25, 24268 },\n        { 30, 835 },\n        { 35, 24269 },\n        { 40, 28767 },\n        { 45, 23836 },\n        { 50, 116139 },\n        { 60, 32825 },\n        { 70, 41265 },\n        { 80, 35278 },\n        { 100, 33119 },\n    }\n    for _, rangeData in ipairs(getRange) do\n        local maxRange, itemID = unpack(rangeData)\n        if maxRange == range then\n            return C_Item.IsItemInRange(itemID, unit)\n        end\n    end\n    return false\nend\n\nlocal inRange, unitID = 0\nfor _, plate in pairs(C_NamePlate.GetNamePlates()) do\n    unitID = plate.namePlateUnitToken\n    if UnitCanAttack(\"player\", unitID) then\n        if isUnitInRange(unitID, mob_range) then\n            if UnitHealth(unitID) > mob_health  then\n                inRange = inRange + 1\n            end\n        end\n    end\nend\nreturn inRange",
+            "desc": "",
+            "func_args": [
+                "mob_range",
+                " mob_health"
+            ],
+            "used": false,
+            "func_name": "p_SLBDtERB"
+        },
+        "\u73a9\u5bb6\u5b58\u5728Buff": {
+            "code": "    local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", buff_name,\"HELPFUL|PLAYER\")\n    if aura then\n        return true\n    end\n    return false",
+            "desc": "",
+            "func_args": [
+                "buff_name"
+            ],
+            "used": false,
+            "func_name": "p_KyRNgInG"
+        },
+        "\u73a9\u5bb6\u5b58\u5728Debuff": {
+            "code": "local aura = C_UnitAuras.GetAuraDataBySpellName(\"player\", buff_name , \"HARMFUL\")\nif aura then\n    return true\nend\nreturn false",
+            "desc": "",
+            "func_args": [
+                "buff_name"
+            ],
+            "used": true,
+            "func_name": "p_bXDSXlLS"
+        },
+        "\u76ee\u6807Debuff\u5269\u4f59\u65f6\u95f4": {
+            "code": "    local aura  = C_UnitAuras.GetAuraDataBySpellName(\"target\", debuff_name,\"HARMFUL|PLAYER\")\n    if aura  then\n        local remaining = aura.expirationTime - GetTime()\n        return math.max(remaining, 0)\n    end\n    return 0",
+            "desc": "",
+            "func_args": [
+                "debuff_name"
+            ],
+            "used": false,
+            "func_name": "p_RTISqgOW"
+        },
+        "\u5c16\u523a\u91ca\u653e": {
+            "code": "return PixelRotationLT.EnemiesIsImportantSpell()",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_OPGNVdfh"
+        },
+        "\u7b26\u6587\u5203\u821e\u7684CD": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u7b26\u6587\u5203\u821e\")\nlocal spellCooldownInfo = C_Spell.GetSpellCooldown(spellInfo.spellID)\n\nif spellCooldownInfo.duration == 0 then\n    return 0\nelse\n    return spellCooldownInfo.startTime + spellCooldownInfo.duration - GetTime()\nend",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_IPzOTKEP"
+        },
+        "\u6280\u80fd\u53ef\u7528": {
+            "code": "local isUsable, _ = C_Spell.IsSpellUsable(spellIdentifier)\nreturn isUsable",
+            "desc": "",
+            "func_args": [
+                "spellIdentifier"
+            ],
+            "used": false,
+            "func_name": "p_qssZMcDq"
+        },
+        "\u5438\u8840\u9b3c\u4e4b\u8840\u51b7\u5374\u65f6\u95f4": {
+            "code": "",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_ismCatLj"
+        },
+        "\u5438\u8840\u9b3c\u4e4b\u8840\u7684CD": {
+            "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u5438\u8840\u9b3c\u4e4b\u8840\")\nlocal spellCooldownInfo = C_Spell.GetSpellCooldown(spellInfo.spellID)\n\nif spellCooldownInfo.duration == 0 then\n    return 0\nelse\n    return spellCooldownInfo.startTime + spellCooldownInfo.duration - GetTime()\nend",
+            "desc": "",
+            "func_args": [],
+            "used": false,
+            "func_name": "p_vYweRYWp"
+        }
+    },
+    "macros": {
+        "\u7075\u754c\u6253\u51fb": {
+            "code": "/cast \u7075\u754c\u6253\u51fb",
+            "desc": "",
+            "key": "CTRL-F10",
+            "color": "0,255,153",
+            "macro_name": "m_bkzcKkBk",
+            "frame_name": "f_OhykINPe",
+            "btn_name": "b_RHBlnYca",
+            "used": false
+        },
+        "\u8840\u6db2\u6cb8\u817e": {
+            "code": "/cast \u8840\u6db2\u6cb8\u817e",
+            "desc": "",
+            "key": "CTRL-NUMPAD1",
+            "color": "255,229,0",
+            "macro_name": "m_XotncdRg",
+            "frame_name": "f_VuGAzIul",
+            "btn_name": "b_eExfeMLl",
+            "used": false
+        },
+        "\u7cbe\u9ad3\u5206\u88c2": {
+            "code": "/cast \u7cbe\u9ad3\u5206\u88c2",
+            "desc": "",
+            "key": "SHIFT-NUMPAD1",
+            "color": "0,229,255",
+            "macro_name": "m_StfiNZoH",
+            "frame_name": "f_sifRjbzU",
+            "btn_name": "b_exVlAzFF",
+            "used": false
+        },
+        "\u6b7b\u795e\u7684\u629a\u6469": {
+            "code": "/cast \u6b7b\u795e\u7684\u629a\u6469",
+            "desc": "",
+            "key": "CTRL-F5",
+            "color": "255,178,0",
+            "macro_name": "m_LKkhMsoH",
+            "frame_name": "f_VlFtFqeS",
+            "btn_name": "b_PReuWndL",
+            "used": false
+        },
+        "\u5de5\u7a0b\u62a4\u8155": {
+            "code": "/use 9",
+            "desc": "",
+            "key": "ALT-NUMPAD2",
+            "color": "0,178,255",
+            "macro_name": "m_XSYauGul",
+            "frame_name": "f_pxXsIwVb",
+            "btn_name": "b_VQZrXQVl",
+            "used": false
+        },
+        "\u5fc3\u7075\u51b0\u51bb\u7126\u70b9": {
+            "code": "/cast [target=focus] \u5fc3\u7075\u51b0\u51bb",
+            "desc": "",
+            "key": "ALT-NUMPAD5",
+            "color": "255,102,0",
+            "macro_name": "m_IVvzAnXM",
+            "frame_name": "f_MBfsqeAP",
+            "btn_name": "b_THKSFXUG",
+            "used": false
+        },
+        "\u5fc3\u7075\u51b0\u51bb\u76ee\u6807": {
+            "code": "/cast \u5fc3\u7075\u51b0\u51bb",
+            "desc": "",
+            "key": "SHIFT-F8",
+            "color": "102,255,0",
+            "macro_name": "m_oCjvMfvA",
+            "frame_name": "f_WLKRZNDh",
+            "btn_name": "b_hGyUZggs",
+            "used": false
+        },
+        "\u67af\u840e\u51cb\u96f6": {
+            "code": "/cast [@player]  \u67af\u840e\u51cb\u96f6",
+            "desc": "\u811a\u4e0b\u51cb\u96f6",
+            "key": "ALT-F2",
+            "color": "255,0,77",
+            "macro_name": "m_mpfhbIdB",
+            "frame_name": "f_qnhEBpgk",
+            "btn_name": "b_aVReZKjY",
+            "used": false
+        },
+        "\u5fc3\u810f\u6253\u51fb": {
+            "code": "/cast \u5fc3\u810f\u6253\u51fb",
+            "desc": "",
+            "key": "CTRL-NUMPAD0",
+            "color": "0,255,0",
+            "macro_name": "m_dNEgdaDW",
+            "frame_name": "f_eydiRvas",
+            "btn_name": "b_MKUZtwFZ",
+            "used": false
+        },
+        "\u767d\u9aa8\u98ce\u66b4": {
+            "code": "/cast \u767d\u9aa8\u98ce\u66b4",
+            "desc": "",
+            "key": "CTRL-NUMPAD3",
+            "color": "102,0,255",
+            "macro_name": "m_PSRmMlLS",
+            "frame_name": "f_zLrtDQQk",
+            "btn_name": "b_TTGtRDMN",
+            "used": false
+        },
+        "\u6b7b\u795e\u5370\u8bb0": {
+            "code": "/cast \u6b7b\u795e\u5370\u8bb0",
+            "desc": "",
+            "key": "ALT-F7",
+            "color": "0,255,51",
+            "macro_name": "m_frmzmFUW",
+            "frame_name": "f_awnFolGf",
+            "btn_name": "b_AyERdlTg",
+            "used": false
+        },
+        "\u541e\u566c": {
+            "code": "/cast \u541e\u566c",
+            "desc": "",
+            "key": "ALT-NUMPAD9",
+            "color": "255,0,128",
+            "macro_name": "m_wXczPFby",
+            "frame_name": "f_hSSeywqd",
+            "btn_name": "b_OqAdyycp",
+            "used": false
+        },
+        "\u5893\u77f3": {
+            "code": "/cast \u5893\u77f3",
+            "desc": "",
+            "key": "SHIFT-NUMPAD2",
+            "color": "0,255,25",
+            "macro_name": "m_ddthhOGs",
+            "frame_name": "f_lgQvoWRS",
+            "btn_name": "b_bCdWcXpj",
+            "used": false
+        },
+        "\u4ea1\u8005\u590d\u751f": {
+            "code": "/cast \u4ea1\u8005\u590d\u751f",
+            "desc": "",
+            "key": "SHIFT-F2",
+            "color": "77,255,0",
+            "macro_name": "m_tflLWXDj",
+            "frame_name": "f_lnckkFTf",
+            "btn_name": "b_RVGwOTgo",
+            "used": false
+        },
+        "\u7075\u9b42\u6536\u5272": {
+            "code": "/cast \u7075\u9b42\u6536\u5272",
+            "desc": "",
+            "key": "ALT-NUMPAD3",
+            "color": "255,0,255",
+            "macro_name": "m_ewgbCixA",
+            "frame_name": "f_XKUCUShb",
+            "btn_name": "b_HREBTaCE",
+            "used": false
+        },
+        "\u65b0\u6708": {
+            "code": "/cast \u65b0\u6708",
+            "desc": "",
+            "key": "SHIFT-F1",
+            "color": "255,0,51",
+            "macro_name": "m_pwKZdpwQ",
+            "frame_name": "f_zAmAfiQS",
+            "btn_name": "b_fzuezuVF",
+            "used": true
+        },
+        "\u8d85\u51e1\u4e4b\u76df": {
+            "code": "/cast \u8d85\u51e1\u4e4b\u76df",
+            "desc": "",
+            "key": "ALT-F5",
+            "color": "255,128,0",
+            "macro_name": "m_MSbsSsZB",
+            "frame_name": "f_lpsywSus",
+            "btn_name": "b_pZflEoMk",
+            "used": true
+        },
+        "\u91ce\u6027\u5370\u8bb0": {
+            "code": "/cast \u91ce\u6027\u5370\u8bb0",
+            "desc": "",
+            "key": "CTRL-F10",
+            "color": "255,0,102",
+            "macro_name": "m_PpEmZgUI",
+            "frame_name": "f_penQjLnt",
+            "btn_name": "b_xNnbkgie",
+            "used": true
+        },
+        "\u67ad\u517d\u5f62\u6001": {
+            "code": "/cast [noform:4]  \u67ad\u517d\u5f62\u6001",
+            "desc": "",
+            "key": "CTRL-F8",
+            "color": "255,0,128",
+            "macro_name": "m_vjkIAHWQ",
+            "frame_name": "f_AOaUwHzu",
+            "btn_name": "b_piisZsmF",
+            "used": true
+        },
+        "\u4e4c\u7d22\u5c14\u65cb\u98ce": {
+            "code": "/cast \u4e4c\u7d22\u5c14\u65cb\u98ce",
+            "desc": "",
+            "key": "SHIFT-F5",
+            "color": "255,0,179",
+            "macro_name": "m_JdnWyuyP",
+            "frame_name": "f_XnUfoxzf",
+            "btn_name": "b_HwnHhGfu",
+            "used": true
+        },
+        "\u718a\u5f62\u6001": {
+            "code": "/cast \u718a\u5f62\u6001",
+            "desc": "",
+            "key": "CTRL-F3",
+            "color": "128,0,255",
+            "macro_name": "m_zfJoztAq",
+            "frame_name": "f_mGISVasU",
+            "btn_name": "b_RaEtlMmo",
+            "used": true
+        },
+        "\u6708\u706b\u672f": {
+            "code": "/cast \u6708\u706b\u672f",
+            "desc": "",
+            "key": "SHIFT-NUMPAD4",
+            "color": "255,0,26",
+            "macro_name": "m_qrRjntVc",
+            "frame_name": "f_qIFmAdio",
+            "btn_name": "b_SIxVjklB",
+            "used": true
+        },
+        "\u661f\u706b\u672f": {
+            "code": "/cast \u661f\u706b\u672f",
+            "desc": "",
+            "key": "SHIFT-F8",
+            "color": "0,51,255",
+            "macro_name": "m_OvdeKZdn",
+            "frame_name": "f_EQnIuNKM",
+            "btn_name": "b_RTNSuCee",
+            "used": true
+        },
+        "\u827e\u9732\u6069\u7684\u6218\u58eb": {
+            "code": "/cast \u827e\u9732\u6069\u7684\u6218\u58eb",
+            "desc": "",
+            "key": "SHIFT-NUMPAD8",
+            "color": "255,0,153",
+            "macro_name": "m_cYcyAnDE",
+            "frame_name": "f_wFlfHAvZ",
+            "btn_name": "b_pKARKpXM",
+            "used": true
+        },
+        "\u9633\u708e\u672f": {
+            "code": "/cast \u9633\u708e\u672f",
+            "desc": "",
+            "key": "ALT-F2",
+            "color": "0,255,102",
+            "macro_name": "m_FhqsQcli",
+            "frame_name": "f_YYNRzZtq",
+            "btn_name": "b_fqCqhNZz",
+            "used": true
+        },
+        "\u6124\u6012": {
+            "code": "/cast \u6124\u6012",
+            "desc": "",
+            "key": "ALT-NUMPAD4",
+            "color": "0,153,255",
+            "macro_name": "m_pgvwqeAY",
+            "frame_name": "f_VGCKfrzc",
+            "btn_name": "b_HQVbXgIT",
+            "used": true
+        },
+        "\u4e07\u7075\u4e4b\u53ec": {
+            "code": "/cast \u4e07\u7075\u4e4b\u53ec",
+            "desc": "",
+            "key": "ALT-F3",
+            "color": "51,0,255",
+            "macro_name": "m_ltlbsxCz",
+            "frame_name": "f_PjWhiCtm",
+            "btn_name": "b_VgQzGWWx",
+            "used": true
+        },
+        "\u661f\u8fb0\u5760\u843d": {
+            "code": "/cast \u661f\u8fb0\u5760\u843d",
+            "desc": "",
+            "key": "CTRL-NUMPAD2",
+            "color": "0,255,255",
+            "macro_name": "m_UzgNYmjq",
+            "frame_name": "f_NUieqTou",
+            "btn_name": "b_FGcZTdnW",
+            "used": true
+        },
+        "\u827e\u9732\u6069\u4e4b\u6012": {
+            "code": "/cast \u827e\u9732\u6069\u4e4b\u6012",
+            "desc": "",
+            "key": "ALT-NUMPAD1",
+            "color": "51,255,0",
+            "macro_name": "m_PBUqsQTd",
+            "frame_name": "f_ixZkoMLR",
+            "btn_name": "b_roNjMced",
+            "used": true
+        },
+        "\u590d\u751f": {
+            "code": "/cast \u590d\u751f",
+            "desc": "",
+            "key": "ALT-F12",
+            "color": "0,128,255",
+            "macro_name": "m_JgyEaFzv",
+            "frame_name": "f_ekWCxUDu",
+            "btn_name": "b_LutkGMJQ",
+            "used": true
+        },
+        "\u661f\u6d8c\u672f": {
+            "code": "/cast \u661f\u6d8c\u672f",
+            "desc": "",
+            "key": "CTRL-NUMPAD9",
+            "color": "26,255,0",
+            "macro_name": "m_zwRBbBTl",
+            "frame_name": "f_QUSMaMQG",
+            "btn_name": "b_zykvkdbJ",
+            "used": true
+        },
+        "\u65e5\u5149\u672f": {
+            "code": "/cast \u65e5\u5149\u672f",
+            "desc": "",
+            "key": "ALT-NUMPAD7",
+            "color": "0,102,255",
+            "macro_name": "m_ehJpaEDe",
+            "frame_name": "f_NlAhIAeT",
+            "btn_name": "b_RoFjNLQW",
+            "used": true
+        },
+        "\u6fc0\u6d3b": {
+            "code": "/cast \u6fc0\u6d3b",
+            "desc": "",
+            "key": "CTRL-F5",
+            "color": "204,255,0",
+            "macro_name": "m_vhdedutj",
+            "frame_name": "f_VLvcAInL",
+            "btn_name": "b_CzFCmrkh",
+            "used": true
+        },
+        "\u7518\u9716": {
+            "code": "/cast \u7518\u9716",
+            "desc": "",
+            "key": "SHIFT-F11",
+            "color": "77,255,0",
+            "macro_name": "m_BuXJIAQS",
+            "frame_name": "f_gJysARhJ",
+            "btn_name": "b_JDBtMaPR",
+            "used": true
+        },
+        "\u6e05\u9664\u8150\u8680": {
+            "code": "/cast \u6e05\u9664\u8150\u8680",
+            "desc": "",
+            "key": "ALT-F10",
+            "color": "0,76,255",
+            "macro_name": "m_OphkDQuN",
+            "frame_name": "f_cMYFNSvy",
+            "btn_name": "b_ncZqFZjQ",
+            "used": true
+        },
+        "\u6811\u76ae\u672f": {
+            "code": "/cast \u6811\u76ae\u672f",
+            "desc": "",
+            "key": "CTRL-F6",
+            "color": "255,77,0",
+            "macro_name": "m_HSAqQcmC",
+            "frame_name": "f_YtAxIiwR",
+            "btn_name": "b_bYBJFHsS",
+            "used": true
+        },
+        "\u6108\u5408": {
+            "code": "/cast \u6108\u5408",
+            "desc": "",
+            "key": "ALT-NUMPAD3",
+            "color": "0,255,204",
+            "macro_name": "m_QqoyeMxz",
+            "frame_name": "f_grHoBfZR",
+            "btn_name": "b_YPPSZVmV",
+            "used": true
+        },
+        "\u5b89\u629a": {
+            "code": "/cast \u5b89\u629a",
+            "desc": "",
+            "key": "CTRL-F11",
+            "color": "230,255,0",
+            "macro_name": "m_PWjSnSkg",
+            "frame_name": "f_HVAlExrK",
+            "btn_name": "b_HbMRdAAb",
+            "used": true
+        },
+        "\u56de\u6625\u672f": {
+            "code": "/cast \u56de\u6625\u672f",
+            "desc": "",
+            "key": "CTRL-NUMPAD4",
+            "color": "255,204,0",
+            "macro_name": "m_osIOexoQ",
+            "frame_name": "f_pBRMwzdJ",
+            "btn_name": "b_mxxvfeGk",
+            "used": true
+        },
+        "\u91ce\u6027\u8611\u83c7": {
+            "code": "/cast \u91ce\u6027\u8611\u83c7",
+            "desc": "",
+            "key": "CTRL-NUMPAD0",
+            "color": "230,0,255",
+            "macro_name": "m_TeJBRRKq",
+            "frame_name": "f_tvpjzFpZ",
+            "btn_name": "b_xWsFzgjK",
+            "used": true
+        },
+        "\u81ea\u7136\u7684\u5b88\u62a4": {
+            "code": "/cast \u81ea\u7136\u7684\u5b88\u62a4",
+            "desc": "",
+            "key": "SHIFT-NUMPAD9",
+            "color": "0,255,25",
+            "macro_name": "m_dWPnJEpr",
+            "frame_name": "f_TKDDKvAG",
+            "btn_name": "b_CMMQyNVZ",
+            "used": true
+        },
+        "\u81ea\u7136\u4e4b\u529b": {
+            "code": "/cast \u81ea\u7136\u4e4b\u529b",
+            "desc": "",
+            "key": "ALT-F9",
+            "color": "153,255,0",
+            "macro_name": "m_pCekVcQJ",
+            "frame_name": "f_nPXZBUAt",
+            "btn_name": "b_hQfoNzmu",
+            "used": true
+        },
+        "\u661f\u8fb0\u8000\u6591": {
+            "code": "/cast \u661f\u8fb0\u8000\u6591",
+            "desc": "",
+            "key": "CTRL-NUMPAD7",
+            "color": "204,0,255",
+            "macro_name": "m_ufuuyjPo",
+            "frame_name": "f_KSnScGLG",
+            "btn_name": "b_JwHZrFQo",
+            "used": true
+        },
+        "\u7cbe\u7075\u866b\u7fa4": {
+            "code": "/cast \u7cbe\u7075\u866b\u7fa4",
+            "desc": "",
+            "key": "ALT-NUMPAD6",
+            "color": "76,0,255",
+            "macro_name": "m_bpqADdGh",
+            "frame_name": "f_TZImWrTL",
+            "btn_name": "b_ZtSWJVYu",
+            "used": true
+        }
+    }
+}

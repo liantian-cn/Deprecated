@@ -1,0 +1,33 @@
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="site-name col-mb-12 col-9">
+                {% if config.SITE_LOGO %}
+                    <a id="logo" href="{{ config.SITE_URL }}">
+                        <img src="{{ config.SITE_LOGO }}" alt="{{ config.SITE_NAME }}"/>
+                    </a>
+                {% else %}
+                    <a id="logo" href="{{ config.SITE_URL }}">{{ config.SITE_NAME }}</a>
+                    <p class="description">{{ config.SITE_DESCRIPTION }}</p>
+                {% endif %}
+            </div>
+            <div class="site-search col-3 kit-hidden-tb">
+                <form id="search" method="post" action="{{ url_for("search") }}" role="search">
+                    <label for="s" class="sr-only">搜索关键字</label>
+                    <input type="text" id="s" name="s" class="text" placeholder="输入关键字搜索"/>
+                    <button type="submit" class="submit">搜索</button>
+                </form>
+            </div>
+            <div class="col-mb-12">
+                <nav id="nav-menu" class="clearfix" role="navigation">
+                    <a {% if request.path == "/" %}class="current"{% endif %} href="{{ config.SITE_URL }}">首页</a>
+                    {% for page in pages %}
+                        <a {% if request.path == url_for("page" ,slug=page.slug ) %}class="current"{% endif %} href="{{ url_for("page" ,slug=page.slug ) }}" title="{{ page.title }}">{{ page.title }}</a>
+                    {% endfor %}
+                </nav>
+            </div>
+        </div><!-- end .row -->
+    </div>
+</header><!-- end #header -->
+
+

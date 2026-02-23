@@ -1,0 +1,294 @@
+戴森球计划修改
+##############
+
+:title: 戴森球计划修改
+:Date: 2021-05-30
+:Modified: 2021-05-30
+:Tags: Game
+:Summary: 《戴森球计划》可以直接使用dnspy修改。好玩的游戏！不要过度修改失去乐趣。
+
+
+去掉采集器只能在赤道上搭建的限制
+================================
+
+``BuildTool_Click.cs``
+
+::
+
+   if (y2 > 0.1f || y2 < -0.1f)
+   {
+       // 注销掉
+       // buildPreview.condition = EBuildCondition.BuildInEquator;
+       goto IL_1CF7;
+   }
+
+去掉抽水机的限制
+================
+
+``BuildTool_Click.cs``
+
+::
+
+   //buildPreview.condition = EBuildCondition.NeedWater;
+   替换为
+   buildPreview.condition = EBuildCondition.Ok;
+
+0.7.18的连续建造限制
+====================
+
+``BuildTool_Click.cs``
+
+::
+
+   protected override void _OnInit()
+   {
+         this.dotsSnapped = new Vector3[12];   //  12可以改大
+   }
+
+让宇宙密度更大，星系间路径更小
+==============================
+
+``UniverseGen.cs``
+
+::
+
+   num = UniverseGen.GenerateTempPoses(dotNet35Random.Next(), num, 4, 2.0, 2.3, 3.5, 0.18);
+   // 替换为
+   num = UniverseGen.GenerateTempPoses(dotNet35Random.Next(), num, 4, 0.6, 0.8, 1.6, 0.18);
+
+不需要沙土
+==========
+
+``PlanetFactory.cs``
+
+::
+
+   修改 ComputeFlattenTerrainReform的结尾
+   return num7;
+   修改为
+   return -Mathf.Abs(num7);
+
+星球数量
+========
+
+StarGen.cs
+
+找到CreateStarPlanets，从第一个if开始到\ ``star.planetCount = 1;``
+
+::
+
+   if (star.type == EStarType.BlackHole)
+   {
+       star.planetCount = 1;
+       star.planets = new PlanetData[star.planetCount];
+       int info_seed = dotNet35Random2.Next();
+       int gen_seed = dotNet35Random2.Next();
+       star.planets[0] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 0, 0, 3, 1, false, info_seed, gen_seed);
+   }
+   else if (star.type == EStarType.NeutronStar)
+   {
+       star.planetCount = 1;
+       star.planets = new PlanetData[star.planetCount];
+       int info_seed2 = dotNet35Random2.Next();
+       int gen_seed2 = dotNet35Random2.Next();
+       star.planets[0] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 0, 0, 3, 1, false, info_seed2, gen_seed2);
+   }
+   else if (star.type == EStarType.WhiteDwarf)
+   {
+       star.planetCount = 2;
+       star.planets = new PlanetData[star.planetCount];
+       if (num2 < 0.30000001192092896)
+       {
+           int info_seed3 = dotNet35Random2.Next();
+           int gen_seed3 = dotNet35Random2.Next();
+           star.planets[0] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 0, 0, 3, 1, false, info_seed3, gen_seed3);
+           info_seed3 = dotNet35Random2.Next();
+           gen_seed3 = dotNet35Random2.Next();
+           star.planets[1] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 1, 0, 4, 2, false, info_seed3, gen_seed3);
+       }
+       else
+       {
+           int info_seed4 = dotNet35Random2.Next();
+           int gen_seed4 = dotNet35Random2.Next();
+           star.planets[0] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 0, 0, 4, 1, true, info_seed4, gen_seed4);
+           info_seed4 = dotNet35Random2.Next();
+           gen_seed4 = dotNet35Random2.Next();
+           star.planets[1] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 1, 1, 1, 1, false, info_seed4, gen_seed4);
+       }
+   }
+   else if (star.type == EStarType.GiantStar)
+   {
+       star.planetCount = 3;
+       star.planets = new PlanetData[star.planetCount];
+       if (num2 < 0.15000000596046448)
+       {
+           int info_seed5 = dotNet35Random2.Next();
+           int gen_seed5 = dotNet35Random2.Next();
+           star.planets[0] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 0, 0, (num3 > 0.5) ? 3 : 2, 1, false, info_seed5, gen_seed5);
+           info_seed5 = dotNet35Random2.Next();
+           gen_seed5 = dotNet35Random2.Next();
+           star.planets[1] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 1, 0, (num3 > 0.5) ? 4 : 3, 2, false, info_seed5, gen_seed5);
+           info_seed5 = dotNet35Random2.Next();
+           gen_seed5 = dotNet35Random2.Next();
+           star.planets[2] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 2, 0, (num3 > 0.5) ? 5 : 4, 3, false, info_seed5, gen_seed5);
+       }
+       else if (num2 < 0.75)
+       {
+           int info_seed6 = dotNet35Random2.Next();
+           int gen_seed6 = dotNet35Random2.Next();
+           star.planets[0] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 0, 0, (num3 > 0.5) ? 3 : 2, 1, false, info_seed6, gen_seed6);
+           info_seed6 = dotNet35Random2.Next();
+           gen_seed6 = dotNet35Random2.Next();
+           star.planets[1] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 1, 0, 4, 2, true, info_seed6, gen_seed6);
+           info_seed6 = dotNet35Random2.Next();
+           gen_seed6 = dotNet35Random2.Next();
+           star.planets[2] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 2, 2, 1, 1, false, info_seed6, gen_seed6);
+       }
+       else
+       {
+           int info_seed7 = dotNet35Random2.Next();
+           int gen_seed7 = dotNet35Random2.Next();
+           star.planets[0] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 0, 0, (num3 > 0.5) ? 4 : 3, 1, true, info_seed7, gen_seed7);
+           info_seed7 = dotNet35Random2.Next();
+           gen_seed7 = dotNet35Random2.Next();
+           star.planets[1] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 1, 1, 1, 1, false, info_seed7, gen_seed7);
+           info_seed7 = dotNet35Random2.Next();
+           gen_seed7 = dotNet35Random2.Next();
+           star.planets[2] = PlanetGen.CreatePlanet(galaxy, star, gameDesc, 2, 1, 2, 2, false, info_seed7, gen_seed7);
+       }
+   }
+   else
+   {
+       Array.Clear(StarGen.pGas, 0, StarGen.pGas.Length);
+       if (star.index == 0)
+       {
+           star.planetCount = 4;
+           StarGen.pGas[0] = 0.0;
+           StarGen.pGas[1] = 0.0;
+           StarGen.pGas[2] = 0.0;
+       }
+       else if (star.spectr == ESpectrType.M)
+       {
+           star.planetCount = 8;
+           StarGen.pGas[0] = 0.0;
+           StarGen.pGas[1] = 0.2;
+           StarGen.pGas[2] = 0.3;
+           StarGen.pGas[3] = 0.0;
+           StarGen.pGas[4] = 0.2;
+           StarGen.pGas[5] = 0.3;
+       }
+       else if (star.spectr == ESpectrType.K)
+       {
+           star.planetCount = 8;
+           StarGen.pGas[0] = 0.0;
+           StarGen.pGas[1] = 0.18;
+           StarGen.pGas[2] = 0.28;
+           StarGen.pGas[3] = 0.28;
+           StarGen.pGas[4] = 0.0;
+           StarGen.pGas[5] = 0.18;
+           StarGen.pGas[6] = 0.28;
+           StarGen.pGas[7] = 0.28;
+       }
+       else if (star.spectr == ESpectrType.G)
+       {
+           star.planetCount = 8;
+           StarGen.pGas[0] = 0.0;
+           StarGen.pGas[1] = 0.2;
+           StarGen.pGas[2] = 0.3;
+           StarGen.pGas[3] = 0.3;
+           StarGen.pGas[4] = 0.0;
+           StarGen.pGas[5] = 0.2;
+       }
+       else if (star.spectr == ESpectrType.F)
+       {
+           star.planetCount = 8;
+           StarGen.pGas[0] = 0.0;
+           StarGen.pGas[1] = 0.22;
+           StarGen.pGas[2] = 0.31;
+           StarGen.pGas[3] = 0.31;
+           StarGen.pGas[4] = 0.0;
+           StarGen.pGas[5] = 0.22;
+       }
+       else if (star.spectr == ESpectrType.A)
+       {
+           star.planetCount = 8;
+           StarGen.pGas[0] = 0.1;
+           StarGen.pGas[1] = 0.28;
+           StarGen.pGas[2] = 0.3;
+           StarGen.pGas[3] = 0.35;
+           StarGen.pGas[4] = 0.1;
+           StarGen.pGas[5] = 0.28;
+       }
+       else if (star.spectr == ESpectrType.B)
+       {
+           star.planetCount = 8;
+           StarGen.pGas[0] = 0.1;
+           StarGen.pGas[1] = 0.22;
+           StarGen.pGas[2] = 0.28;
+           StarGen.pGas[3] = 0.35;
+           StarGen.pGas[4] = 0.35;
+           StarGen.pGas[5] = 0.1;
+           StarGen.pGas[6] = 0.22;
+       }
+       else if (star.spectr == ESpectrType.O)
+       {
+           star.planetCount = 8;
+           StarGen.pGas[0] = 0.1;
+           StarGen.pGas[1] = 0.2;
+           StarGen.pGas[2] = 0.25;
+           StarGen.pGas[3] = 0.3;
+           StarGen.pGas[4] = 0.32;
+           StarGen.pGas[5] = 0.35;
+           StarGen.pGas[6] = 0.1;
+           StarGen.pGas[7] = 0.2;
+       }
+       else
+       {
+           star.planetCount = 1;
+       }
+
+修改物流塔上限
+==============
+
+UIStationStorage.cs
+
+::
+
+   this.maxValueText.text = stationStore.max.ToString();
+   int num = 100000;   // 这里
+   int num2 = num / 100;
+
+更多的矿物
+==========
+
+PlanetAlgorithm.cs
+
+::
+
+       if (spectr == ESpectrType.M)
+       {
+           p = 2.5f;
+       }
+       else if (spectr == ESpectrType.K)
+       {
+           p = 2.5f;
+       }
+       else if (spectr == ESpectrType.G)
+       {
+           p = 2.5f;
+       }
+       else if (spectr == ESpectrType.F)
+       {
+           p = 2.5f;
+       }
+       else if (spectr == ESpectrType.A)
+       {
+           p = 2.5f;
+       }
+       else if (spectr == ESpectrType.B)
+       {
+           p = 2.5f;
+       }
+       else if (spectr == ESpectrType.O)
+       {
+           p = 2.5f;

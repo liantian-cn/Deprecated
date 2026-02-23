@@ -1,0 +1,5 @@
+{
+    "code": "return UnitPower(\"player\", Enum.PowerType.Mana)",
+    "desc": "",
+    "func_args": []
+}

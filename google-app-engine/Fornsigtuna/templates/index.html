@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="QR Code Generator">
+    <meta name="Author" content="Lien Tian">
+    <meta charset="UTF-8">
+    <title>中文簡繁轉換</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="header">
+    <div class="header-main">
+        <div class="headerlogo">
+            <a href="/">中文簡繁轉換</a>
+        </div>
+        <div class="headermenu">
+            <ul>
+                <li><a href="https://liantian.me/" title="ToolBox">LIANTIAN&#39;S LOG</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content post entry ">
+    <p>一个简单的简繁转换工具，但不同于常见的转换工具针对<strong>字</strong>进行转换，这个工具针对<strong>詞</strong>。
+    <br/>比如大陆写“源代码”，台湾写“原始碼”。
+    <br/>又比如大陆写“餐台”，香港写“餐枱”，臺灣写“餐檯”。</p>
+
+
+    <p>转换规则来此维基百科<a href="https://phabricator.wikimedia.org/source/mediawiki/browse/master/languages/data/ZhConversion.php">ZhConversion.php</a> </p>
+    <p>提供完整的api:</p>
+    <ul>
+        <li>
+            URL : <a href="{{ url_for('api') }}">/api</a>
+        </li>
+        <li>
+            Method : POST
+        </li>
+    </ul>
+
+    <table>
+        <thead>
+        <tr>
+            <th>参数</th>
+            <th>是否必须</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>text</td>
+            <td>是</td>
+            <td>待转换的的字符，UTF-8编码</td>
+        </tr>
+        <tr>
+            <td>html</td>
+            <td>否</td>
+            <td>默认返回一个json字符串，如果传入任意值的html参数，将返回一个html文本。</td>
+        </tr>
+        <tr>
+            <td>lang</td>
+            <td>是</td>
+            <td>目标翻译的语言，必须是下列之一：
+                <ul>
+                    <li>zh-Hans - 通用简体(即只按字转换)</li>
+                    <li>zh-cn - 大陆简体</li>
+                    <li>zh-Hant - 通用繁体(即只按字转换)</li>
+                    <li>zh-hk - 香港繁体</li>
+                    <li>zh-tw - 台湾繁体</li>
+                </ul>
+                不区分大小写。
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>API测试</h3>
+    <form action="{{ url_for("api") }}" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+        <p>text:<textarea rows="10" cols="30" name="text" style="width: 100%;"></textarea></p>
+        <p>
+            size:
+            <select name="lang">
+                    <option value="zh-Hans">通用简体(即只按字转换)</option>
+                    <option value="zh-cn">大陆简体</option>
+                    <option value="zh-Hant">通用繁体(即只按字转换)</option>
+                    <option value="zh-hk">香港繁体</option>
+                    <option value="zh-tw">台湾繁体</option>
+
+            </select>
+        </p>
+        <p>返回html：<input type="checkbox" name="html">
+        </p>
+
+
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+
+
+<div class="footer">
+    <p><a href="https://github.com/liantian-cn/Fornsigtuna">Source Code</a></p>
+    <p> &copy; 2010-2018 liantian.me, All Rights Reserved.</p>
+</div>
+
+
+</body>
+</html>
+
+

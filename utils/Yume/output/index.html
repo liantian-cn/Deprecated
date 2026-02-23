@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yume 文档</title>
+  <link rel="stylesheet" href="https://unpkg.com/terminal.css@0.7.4/dist/terminal.min.css" />
+  <link rel="stylesheet" crossorigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Medium.min.css" />
+  <link rel="stylesheet" crossorigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Bold.min.css" />
+  <style>
+    :root {
+      --global-font-size: 15px;
+      --global-line-height: 1.4em;
+      --global-space: 10px;
+      --font-stack: 'MiSans', sans-serif;
+      --mono-font-stack: "MiSans", monospace;
+      --background-color: #222225;
+      --page-width: 60em;
+      --font-color: #e8e9ed;
+      --invert-font-color: #222225;
+      --secondary-color: #a3abba;
+      --tertiary-color: #a3abba;
+      --primary-color: #62c4ff;
+      --error-color: #ff3c74;
+      --progress-bar-background: #3f3f44;
+      --progress-bar-fill: #62c4ff;
+      --code-bg-color: #3f3f44;
+      --input-style: solid;
+      --display-h1-decoration: none;
+    }
+    
+    /* Code highlighting styles */
+    pre.codehilite {
+      background-color: var(--code-bg-color);
+      border-radius: 4px;
+      padding: var(--global-space);
+      overflow-x: auto;
+    }
+    
+    code {
+      background-color: var(--code-bg-color);
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: var(--mono-font-stack);
+    }
+    
+    /* Table styles */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: var(--global-space) 0;
+    }
+    
+    th, td {
+      border: 1px solid var(--secondary-color);
+      padding: 8px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #333;
+    }
+    </style>
+</head>
+
+<body class="terminal">
+
+
+  <div class="container">
+    <div class="terminal-nav">
+      <header class="terminal-logo">
+        <div class="logo terminal-prompt"><a href="#" class="no-style">Yume 文档</a></div>
+      </header>
+    </div>
+  </div>
+
+  <div class="container">
+    <section>
+      <header>
+        <h2>目录</h2>
+      </header>
+      <nav>
+        <ul>
+          
+          <li><a href="#介绍">介绍</a></li>
+          
+          <li><a href="#使用指南">使用指南</a></li>
+          
+          <li><a href="#项目结构">项目结构</a></li>
+          
+          <li><a href="#测试表格渲染">测试表格渲染</a></li>
+          
+        </ul>
+      </nav>
+    </section>
+
+    
+    <section>
+      <div id="介绍"></div>
+      <h1>介绍</h1>
+<p>这是一个使用Python将多个Markdown文件合并生成单页HTML的工具。</p>
+<p><img alt="示例图片" src="./media/8DD37E114D8F1876A59B454658B71689E3886286.jpg" /></p>
+<h2>功能特点</h2>
+<ul>
+<li>支持多个Markdown文件按顺序合并</li>
+<li>使用Jinja2模板引擎渲染</li>
+<li>自动生成目录</li>
+<li>美观的TerminalCSS样式</li>
+</ul>
+<h2>使用方法</h2>
+<ol>
+<li>在content目录下添加Markdown文件</li>
+<li>运行main.py脚本</li>
+<li>在output目录查看生成的HTML文件</li>
+</ol>
+    </section>
+    
+    <section>
+      <div id="使用指南"></div>
+      <h1>使用指南</h1>
+<h2>安装依赖</h2>
+<p>使用uv安装所需依赖：</p>
+<pre class="codehilite"><code class="language-bash">uv add markdown jinja2
+</code></pre>
+
+<h2>运行脚本</h2>
+<pre class="codehilite"><code class="language-bash">uv run python main.py
+</code></pre>
+
+<h2>配置选项</h2>
+<p>脚本支持以下配置：</p>
+<ul>
+<li>content_dir: Markdown文件目录</li>
+<li>output_dir: HTML输出目录</li>
+<li>template_file: 模板文件路径</li>
+<li>title: 页面标题</li>
+</ul>
+    </section>
+    
+    <section>
+      <div id="项目结构"></div>
+      <h1>项目结构</h1>
+<h2>目录说明</h2>
+<ul>
+<li><strong>content/</strong>: 存放Markdown源文件，文件名按顺序排列</li>
+<li><strong>output/</strong>: 存放生成的HTML文件</li>
+<li><strong>templates.html</strong>: Jinja2模板文件，定义HTML页面结构</li>
+<li><strong>main.py</strong>: 主脚本，负责读取Markdown文件并生成HTML</li>
+<li><strong>pyproject.toml</strong>: 项目配置文件，包含依赖信息</li>
+</ul>
+<h2>文件命名规则</h2>
+<p>Markdown文件建议按照以下规则命名：</p>
+<pre class="codehilite"><code>XX_filename.md
+</code></pre>
+
+<p>其中XX为数字，用于控制文件的合并顺序。</p>
+<h2>模板定制</h2>
+<p>可以修改templates.html文件来自定义HTML页面的样式和结构：</p>
+<ul>
+<li>修改title标签自定义页面标题</li>
+<li>修改CSS样式自定义主题</li>
+<li>修改section结构自定义内容布局</li>
+</ul>
+    </section>
+    
+    <section>
+      <div id="测试表格渲染"></div>
+      <h1>测试表格渲染</h1>
+<p>这是一个测试表格：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python</td>
+<td>编程语言</td>
+<td>3.12</td>
+</tr>
+<tr>
+<td>Markdown</td>
+<td>标记语言</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Jinja2</td>
+<td>模板引擎</td>
+<td>3.1.6</td>
+</tr>
+</tbody>
+</table>
+<h2>代码块测试</h2>
+<pre class="codehilite"><code class="language-python"># 这是一个Python代码块
+def hello_world():
+    print(&quot;Hello, World!&quot;)
+</code></pre>
+
+<pre class="codehilite"><code class="language-bash"># 这是一个bash代码块
+echo &quot;Hello, World!&quot;
+</code></pre>
+    </section>
+    
+  </div>
+
+</body>
+
+</html>

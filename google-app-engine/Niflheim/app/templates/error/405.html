@@ -1,0 +1,21 @@
+{% extends "layer/base.html" %}
+
+{% block title %}錯誤 405{{ config.SITE_NAME }}{% endblock %}
+
+
+{% block main %}
+
+
+
+
+    <h2>405 Method Not Allowed</h2>
+
+    <p>
+        請求行中指定的請求方法不能被用於請求相應的資源。該回應必須返回一個Allow頭資訊用以表示出當前資源能夠接受的請求方法的列表。
+    </p>
+
+    <script type="text/javascript" src="//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js" charset="utf-8" homePageUrl="{{ config.SITE_URL }}" homePageName="返回我的主頁"></script>
+
+
+
+{% endblock %}

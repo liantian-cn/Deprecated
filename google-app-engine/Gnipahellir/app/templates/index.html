@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="QR Code Generator">
+    <meta name="Author" content="Lien Tian">
+    <meta charset="UTF-8">
+    <title>IP地址压缩</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="header">
+    <div class="header-main">
+        <div class="headerlogo">
+            <a href="/">IP地址压缩</a>
+        </div>
+        <div class="headermenu">
+            <ul>
+                <li><a href="https://liantian.me/" title="ToolBox">LIANTIAN&#39;S LOG</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content post entry ">
+    <p>一个IP地址段压缩工具。</p>
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>参数</th>
+            <th>是否必须</th>
+            <th>描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>ip_list</td>
+            <td>是</td>
+            <td>
+                待压缩的IP地址列表，每行一个，支持这些格式：
+                <ul>
+
+                    <li>标准CIDR，如：<code>192.0.2.0/24</code></li>
+                    <li>混合CIDR，如：<code>192.0.2.0/255.255.255.0</code></li>
+                    <li>ACL CIDR，如：<code>192.0.2.0/0.0.0.255</code></li>
+                    <li>单个IP地址，如：<code>192.0.2.138</code>，將會隱含<code>/32</code></li>
+                </ul>
+                分组：
+                <ul>
+                    <li>默认组名是<code>root</code>。</li>
+                    <li>可以在ip地址结尾后使用<code>Tab</code>和<code>空格</code>标记组名，如：<br/><code>61.50.192.0/18 China Netcom Group Beijing Corporation</code>。</li>
+
+                </ul>
+                其他：
+                <ul>
+                    <li>以<code>#</code>为起始的行被视为注释，将被忽略。</li>
+                    <li>行尾使用<code>#</code>进行注释。不会被忽略</li>
+                    <li>多余的<code>Tab</code>和<code>空格</code>将被忽略</li>
+                </ul>
+                可在下方测试区域看到范例
+            </td>
+        </tr>
+        <tr>
+            <td>json</td>
+            <td>否</td>
+            <td>如果存在，则返回一个json字符串。</td>
+        </tr>
+        <tr>
+            <td>format</td>
+            <td>否</td>
+            <td>返回值类型，可以是如下字符串，默认是<code>cidr</code>：
+                <ul>
+                    <li><code>cidr</code>：192.0.2.0/24</li>
+                    <li><code>netmask</code>：192.0.2.0/255.255.255.0</li>
+                    <li><code>acl</code>：192.0.2.0/0.0.0.255</li>
+                </ul>
+
+            </td>
+        </tr>
+        <tr>
+            <td>super</td>
+            <td>否</td>
+            <td>一个有损压缩IP地址段的参数。
+                比如当这个值为24时，所有子网大小小于/24子网，都会先放大至/24子网，再参与合并。
+                类似于chnroutes。
+                <br/>默认值32，即不压缩。
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h3>测试</h3>
+    <form action="{{ url_for("api") }}" method="post" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+        <p>ip_list:<textarea rows="10" cols="30" name="ip_list" style="width: 100%;">
+61.50.136.0/22	China Netcom Group Beijing Corporation China
+61.50.136.0/23	China
+	61.50.138.0/255.255.0.0 China
+            # IP LIST
+
+61.50.140.0/24	China Netcom Group Beijing Corporation China  #Comments
+		61.50.142.0/23	China Netcom Group Beijing Corporation China
+61.48.0.0/16	China Unicom Beijing province network China  #Comments
+61.48.0.0/18	China Unicom Beijing province network
+# IP LIST
+61.50.192.0/18	China Netcom Group Beijing Corporation
+        111.67.192.0/21
+111.67.200.0/21
+
+
+        </textarea></p>
+        <p>
+            format:
+            <select name="format">
+                <option value="cidr">cidr</option>
+                <option value="netmask">netmask</option>
+                <option value="acl">acl</option>
+            </select>
+        </p>
+        <p>
+            super:
+            <select name="super">
+                {% for i in range(1,33) %}
+                    <option value="{{ i }}" {% if i==32 %} selected="selected" {% endif %}>{{ i }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>Json：<input type="checkbox" name="json">
+        </p>
+
+
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+
+
+<div class="footer">
+    <p><a href="https://github.com/liantian-cn/Gnipahellir">Source Code</a></p>
+    <p> &copy; 2010-2018 liantian.me, All Rights Reserved.</p>
+</div>
+
+
+</body>
+</html>
+
+

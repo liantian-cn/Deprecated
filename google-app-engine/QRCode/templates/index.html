@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="QR Code Generator">
+    <meta name="Author" content="Lien Tian">
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<div class="header">
+    <div class="header-main">
+        <div class="headerlogo">
+            <a href="/">QR Code Generator</a>
+        </div>
+        <div class="headermenu">
+            <ul>
+                    <li><a href="https://liantian.me/" title="ToolBox">LIANTIAN&#39;S LOG</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content post entry ">
+<h1>QR Code Generator</h1>
+            <ul>
+                <li>
+                    URL : <a href="{{ url_for('api') }}">/api</a>
+                </li>
+                <li>
+                    Method : GET or POST
+                </li>
+            </ul>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Required or Optional</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>data</td>
+                    <td>Required</td>
+                    <td>The data must be UTF-8 URL-encoded. Note that URLs have a 2K maximum length, so if you want to
+                        encode
+                        more than 2K bytes (minus the other URL characters), you will have to send your data using POST.<br/>
+                        <b>Maximum character storage capacity:984</b>,all data will be encoded in UTF-8.
+                    </td>
+                </tr>
+                <tr>
+                    <td>size</td>
+                    <td>Optional</td>
+                    <td>The size of each box.<br/>
+                        The minimum value is 1, each box has only one pixel, and then shrink will not be able to scan.
+                        <br/>
+                        The maximum value is 64, each box has 64 pixels. Image size is determined by the data.<br/>
+                        <b>The default value is 4</b>, is the most common size.
+                    </td>
+                </tr>
+                <tr>
+                    <td>ecl</td>
+                    <td>Optional</td>
+                    <td>error_correction_level - QR codes support four levels of error correction to enable recovery of
+                        missing,
+                        misread, or obscured data.
+                        Greater redundancy is achieved at the cost of being able to store less data. Here are the
+                        supported
+                        values:
+                        <ul>
+                            <li>L - Allows recovery of up to 7% data loss</li>
+                            <li>M - Allows recovery of up to 15% data loss</li>
+                            <li>Q - Allows recovery of up to 25% data loss</li>
+                            <li>H - Allows recovery of up to 30% data loss</li>
+                        </ul>
+                        <b> The default value is M</b>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <form action="{{ url_for("api") }}" method="post">
+                <p>data:<textarea rows="10" cols="30" name="data" maxlength="948" style="width: 100%;"></textarea></p>
+                <p>
+                    size:
+                    <select name="size">
+                        {% for i in range(1,60) %}
+                            <option value="{{ i }}" {% if i==4 %} selected="selected" {% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </p>
+                <p>
+                    error_correction_level:
+                    <select name="ecl">
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="Q" selected="selected">Q</option>
+                        <option value="H">H</option>
+                    </select>
+                </p>
+
+
+                <input type="submit" value="Submit"/>
+            </form>
+</div>
+
+
+<div class="footer">
+            <p><a href="https://github.com/liantian-cn/Toolbox">Source Code</a> &copy; liantian.me.</p>
+</div>
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,7 @@
+cron:
+- description: "category_count"
+  url: /task/category_count
+  schedule: every 12 hours
+- description: "archive_count"
+  url: /task/archive_count
+  schedule: every 12 hours

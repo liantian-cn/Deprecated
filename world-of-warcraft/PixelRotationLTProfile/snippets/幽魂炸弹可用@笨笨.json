@@ -1,0 +1,5 @@
+{
+    "code": "local spellInfo = C_Spell.GetSpellInfo(\"\u5e7d\u9b42\u70b8\u5f39\")\nif spellInfo then\n    return true\nelse\n    return false\nend",
+    "desc": "",
+    "func_args": []
+}

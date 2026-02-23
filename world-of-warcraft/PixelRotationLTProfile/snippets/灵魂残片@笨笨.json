@@ -1,0 +1,5 @@
+{
+    "code": "local aura =  C_UnitAuras.GetAuraDataBySpellName(\"player\", \"\u7075\u9b42\u6b8b\u7247\" , \"HELPFUL\")\nif aura then\n    return aura.applications\nelse\n    return 0\nend",
+    "desc": "",
+    "func_args": []
+}

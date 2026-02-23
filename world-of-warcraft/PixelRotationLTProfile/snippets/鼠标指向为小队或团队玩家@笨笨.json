@@ -1,0 +1,5 @@
+{
+    "code": "return UnitExists(\"mouseover\") and (UnitInParty(\"mouseover\") or UnitInRaid(\"mouseover\"))",
+    "desc": "",
+    "func_args": []
+}

@@ -1,0 +1,49 @@
+docker build --tag chihiro:latest  .
+
+
+docker create \
+    -p 34022:22 \
+    -p 1080:1080 \
+    -p 8080:8080 \
+    -p 34080:8000 \
+    --log-driver local \
+    --log-opt max-size=10m \
+    --log-opt max-file=3 \
+    --log-opt compress=true \
+    --restart always  \
+    --name Chihiro \
+    chihiro:latest
+
+docker export Chihiro  > Chihiro.export.tar
+
+docker start  Chihiro
+
+
+
+docker exec -it Chihiro bash
+
+
+
+
+
+
+
+
+
+
+docker import Chihiro.export.tar chihiro:latest 
+
+
+docker create \
+    -p 33022:22 \
+    -p 1080:1080 \
+    -p 33080:8000 \
+    --log-driver local \
+    --log-opt max-size=10m \
+    --log-opt max-file=3 \
+    --log-opt compress=true \
+    --restart always  \
+    --name Chihiro \
+    chihiro:latest \
+    /usr/bin/supervisord
+

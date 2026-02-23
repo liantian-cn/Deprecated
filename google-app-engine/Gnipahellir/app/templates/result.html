@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="QR Code Generator">
+    <meta name="Author" content="Lien Tian">
+    <meta charset="UTF-8">
+    <title>IP地址壓縮</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        pre {
+            white-space: pre-wrap; /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            word-wrap: break-word; /* Internet Explorer 5.5+ */
+        }
+    </style>
+</head>
+<body>
+
+
+
+<div class="content post entry ">
+    {% if errors %}
+    <h2>錯誤的行：</h2>
+        <pre>{% for error in errors %}
+{{ error.display }}{% endfor %}</pre>
+    {% endif %}
+
+    {% for group in summarized_networks %}
+        <h2>{{ group.group_name }}</h2>
+        <pre>{% for network in group.summarized_networks %}
+{{ network }}{% endfor %}</pre>
+    {% endfor %}
+
+</div>
+
+
+<div class="footer">
+    <p><a href="https://github.com/liantian-cn/Gnipahellir">Source Code</a></p>
+    <p> &copy; 2010-2018 liantian.me, All Rights Reserved.</p>
+</div>
+
+
+</body>
+</html>
+
+

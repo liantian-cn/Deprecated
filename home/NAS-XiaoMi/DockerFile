@@ -1,0 +1,22 @@
+FROM alpine:latest
+
+ENV TZ=Asia/Shanghai
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+RUN echo "@testing https://mirrors.tuna.tsinghua.edu.cn/alpine/edge/testing" >>  /etc/apk/repositories
+
+RUN apk update
+RUN apk add bash  python3 py3-pip py3-astral@testing py3-tz@testing py3-netifaces@testing
+RUN ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install python-miio  --break-system-packages
+
+# Run a cron job
+# COPY crontab.txt /crontab.txt
+# RUN /usr/bin/crontab /crontab.txt
+
+RUN mkdir /app
+COPY main.py /app/main.py
+RUN chmod +x /app/main.py
+
+CMD ["python", "/app/main.py"]

@@ -1,0 +1,209 @@
+彻底删除360企业浏览器的残留
+############################
+
+:title: 彻底删除360企业浏览器的残留
+:Date: 2021-12-08
+:Modified: 2021-12-08
+:tags: Tech
+:Slug: remove-360-ent-browser
+:Summary: 没想到到了企业版，360依然这样，卸载并不能完全恢复ie浏览器为默认值。
+
+
+缘起（怨气）
+============
+
+没想到到了企业版，360依然这样….。卸载360企业浏览器并不能完全恢复ie浏览器为默认值，在嵌入式IE和js的\ ``windows.open()``\ 函数中，依然可能导致错误。
+
+处理办法如下：
+
+保存下面内容为\ ``patch.reg``
+
+::
+
+   Windows Registry Editor Version 5.00
+
+
+   [-HKEY_CURRENT_USER\SOFTWARE\360\360BDoctor]
+
+   [-HKEY_CURRENT_USER\SOFTWARE\360\360se5]
+
+   [-HKEY_CURRENT_USER\SOFTWARE\360\360se6]
+
+   [-HKEY_CURRENT_USER\SOFTWARE\360Chrome]
+
+   [-HKEY_CURRENT_USER\SOFTWARE\360ent6]
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\CabinetState]
+   "Settings"=-
+   "FullPath"=-
+
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\Toolbar]
+   "Locked"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.crx]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.htm]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.html]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.mht]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.mhtm]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.mhtml]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.shtm]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.shtml]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.xht]
+   @=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\.xhtml]
+   @=-
+
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\360entPDF]
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\360entURL]
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\crxfile]
+
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{D5E8041D-920F-45e9-B8FB-B1DEB82C6E5E}]
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\CLSID\{0002DF01-0000-0000-C000-000000000046}]
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432Node\CLSID\{0002DF01-0000-0000-C000-000000000046}]
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432Node\CLSID\{63AE0751-5341-4B42-8E56-82E4EA44B258}]
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\WOW6432Node\CLSID\{D5E8041D-920F-45e9-B8FB-B1DEB82C6E5E}]
+
+   [HKEY_CURRENT_USER\SOFTWARE\RegisteredApplications]
+   "360ent"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Clients\StartMenuInternet\360ent\Capabilities\FileAssociations]
+   ".html"=-
+   ".htm"=-
+   ".shtm"=-
+   ".shtml"=-
+   ".xht"=-
+   ".xhtml"=-
+   ".mht"=-
+   ".mhtm"=-
+   ".mhtml"=-
+   ".crx"=-
+   ".pdf"=-
+
+
+   [HKEY_CURRENT_USER\SOFTWARE\Clients\StartMenuInternet\360ent\Capabilities\StartMenu]
+   "StartMenuInternet"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Clients\StartMenuInternet\360ent\Capabilities\URLAssociations]
+   "ftp"=-
+   "http"=-
+   "https"=-
+
+   [-HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\360ent.exe]
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ApplicationAssociationToasts]
+   "360entURL_.mhtml"=-
+   "360entURL_.mhtm"=-
+   "360entURL_.mht"=-
+   "360entURL_.xhtml"=-
+   "360entURL_.xht"=-
+   "360entURL_.shtml"=-
+   "360entURL_.shtm"=-
+   "360entURL_.htm"=-
+   "360entURL_.html"=-
+   "360entURL_https"=-
+   "360entURL_http"=-
+   "360entURL_ftp"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search\JumplistData]
+   "360ent"=-
+
+
+
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\ftp]
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\ftp]
+
+
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\htmlfile]
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\htmlfile]
+   "URL Protocol"=""
+
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\http]
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\http]
+   "URL Protocol"=""
+   @="URL:http"
+
+
+   [-HKEY_CURRENT_USER\SOFTWARE\Classes\https]
+   [HKEY_CURRENT_USER\SOFTWARE\Classes\https]
+   "URL Protocol"=""
+   @="URL:https"
+
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.mhtm]
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.mhtm\UserChoice]
+   "Progid"=-
+   "ProgId"="IE.AssocFile.MHT"
+   "Hash"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\FTP\UserChoice]
+   "ProgId"="IE.FTP"
+   "Hash"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice]
+   "ProgId"="IE.HTTP"
+   "Hash"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice]
+   "ProgId"="IE.HTTPS"
+   "Hash"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtm\UserChoice]
+   "Progid"=-
+   "ProgId"="IE.AssocFile.HTM"
+   "Hash"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml]
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.shtml\UserChoice]
+   "Progid"=-
+   "ProgId"="IE.AssocFile.HTM"
+   "Hash"=-
+
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\FTP\UserChoice]
+   "ProgId"="IE.FTP"
+   "Hash"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice]
+   "ProgId"="IE.HTTP"
+   "Hash"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice]
+   "ProgId"="IE.HTTPS"
+   "Hash"=-
+
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.htm\OpenWithProgids]
+   "360entURL"=-
+
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.html\OpenWithProgids]
+   "htmlfile"=-
+
+制作一个批处理\ ``gogogo.cmd``
+
+::
+
+   "%APPDATA%\360ent\Application\版本号\Installer\setup.exe" --uninstall
+   REG IMPORT patch.reg
+   %windir%\system32\control.exe /name Microsoft.DefaultPrograms /page pageDefaultProgram\pageAdvancedSettings?pszAppName=Internet%20Explorer
+
+运行批处理后，恢复ie为默认值。

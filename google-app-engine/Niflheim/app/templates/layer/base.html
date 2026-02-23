@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{% block title %}{{ config.SITE_NAME }}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='typecho/normalize.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='typecho/grid.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='typecho/style.css') }}">
+
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+
+    <meta name="description" content="{{ config.SITE_DESCRIPTION }}">
+    <meta name="keywords" content="{{ config.SITE_KEY_WORDS }}">
+    <meta name="author" content="{{ config.SITE_NAME }}">
+
+    <meta name="generator" content="{{ config.BlogEngine }}"/>
+
+
+{#    <link rel="pingback" href="{{ config.SITE_URL }}{{ url_for('pingback') }}"/>#}
+    <link rel="alternate" type="application/rss+xml" title="Hello World &raquo; RSS 2.0" href="{{ config.SITE_URL }}{{ url_for('rss') }}"/>
+
+</head>
+
+<body>
+<!--[if lt IE 8]>
+        <div class="browsehappy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a></div>
+    <![endif]-->
+
+
+{% include 'layer/header.html' %}
+
+<div id="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-mb-12 col-8" id="main" role="main">
+                {% block main %}{% endblock %}
+
+            </div><!-- end #main-->
+
+            <div class="col-mb-12 col-offset-1 col-3 kit-hidden-tb" id="secondary" role="complementary">
+                {% include "layer/sidebar.html" %}
+            </div><!-- end #sidebar -->
+        </div><!-- end .row -->
+    </div>
+</div><!-- end #body -->
+
+<footer id="footer" role="contentinfo">
+    &copy; {{ now.strftime("%Y") }} <a href="{{ config.SITE_URL }}">{{ config.SITE_NAME }}</a>.
+    由 <a href="https://github.com/liantian-cn/Niflheim/">Niflheim</a> 强力驱动.
+</footer><!-- end #footer -->
+<script id="dsq-count-scr" src="//{{ config.SITE_DISQUS_NAME }}.disqus.com/count.js" async></script>
+</body>
+
+
+</html>
+
+
+

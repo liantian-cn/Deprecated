@@ -1,0 +1,5 @@
+{
+    "code": "return  UnitPower(\"player\", Enum.PowerType.RunicPower)",
+    "desc": "",
+    "func_args": []
+}

@@ -1,0 +1,7 @@
+{
+    "code": "return UnitIsUnit(\"player\",UnitId)",
+    "desc": "",
+    "func_args": [
+        "UnitId"
+    ]
+}
